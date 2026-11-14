@@ -1,0 +1,107 @@
+{
+  "bundle": "dsu_rag_embeddings",
+  "built_utc": "2026-11-14T03:43:33Z",
+  "embedding": {
+    "provider": "Google Gemini API",
+    "model": "gemini-embedding-001",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents",
+    "document_task_type": "RETRIEVAL_DOCUMENT",
+    "query_task_type": "RETRIEVAL_QUERY",
+    "dimensions": 1536,
+    "default_model_dimensions": 3072,
+    "normalized": true,
+    "normalization": "manual L2 (gemini-embedding-001 does not auto-normalize non-3072 dims)",
+    "norm_min_after": 1.0,
+    "norm_max_after": 1.0,
+    "norm_mean_before": 0.6896,
+    "metric": "cosine == inner product on normalized vectors",
+    "dtype": "float32"
+  },
+  "corpus": {
+    "source_records": 465,
+    "after_dedup": 461,
+    "vectors": 584,
+    "curated_vectors": 45,
+    "source_corpus_vectors": 539,
+    "windows_created": 187,
+    "max_chars_before_split": 2000,
+    "window_chars": 1200,
+    "window_overlap_chars": 200,
+    "chars_total": 577743,
+    "est_tokens_total": 157138,
+    "tokens_billed_approx": 164994
+  },
+  "files": {
+    "data/vectors.npy": "float32 matrix [n_vectors, 1536], row-aligned with chunks.parquet",
+    "data/chunks.parquet": "metadata + vector column (zstd)",
+    "data/chunks.jsonl": "same rows, embedding as plain JSON list (no pyarrow needed)",
+    "data/index.faiss": "faiss IndexFlatIP, exact cosine search"
+  },
+  "retrieval_contract": {
+    "embed_query_with": "RETRIEVAL_QUERY",
+    "embed_document_with": "RETRIEVAL_DOCUMENT",
+    "must_l2_normalize_query": true,
+    "row_order_is_authoritative": "vectors.npy row i == chunks.parquet row i == index label i",
+    "filter": "exclude retrieval_policy == 'historical_comparison_only_no_current_policy_answers' from current-policy answers"
+  },
+  "validation": {
+    "probes": [
+      {
+        "query": "What is the application processing fee?",
+        "top_score": 0.7129,
+        "top_ids": [
+          "dsu-b127a9130bc5a000",
+          "curated-238ca197c44d843b",
+          "curated-f79a2f849261ed30"
+        ],
+        "top_titles": [
+          "FAQ's - DHA Suffa University",
+          "Conflict alert: application processing fee",
+          "Unverified change candidate 1: application processing fee"
+        ]
+      },
+      {
+        "query": "What programs does DSU offer in engineering?",
+        "top_score": 0.7192,
+        "top_ids": [
+          "dsu-3cba6d960d1abeab",
+          "dsu-c24c6eb68e60de53",
+          "dsu-131938a03dd7dc2f"
+        ],
+        "top_titles": [
+          "Engineering & Applied Sciences - DHA Suffa University",
+          "dsu-Quality - DHA Suffa University",
+          "FAQ's - DHA Suffa University"
+        ]
+      },
+      {
+        "query": "How do I apply for admission?",
+        "top_score": 0.6499,
+        "top_ids": [
+          "dsu-52a2752885df1b1b__w01",
+          "curated-96e7005f49d75724",
+          "dsu-52a2752885df1b1b__w00"
+        ],
+        "top_titles": [
+          "Admission Process - DHA Suffa University",
+          "Admissions application: online route",
+          "Admission Process - DHA Suffa University"
+        ]
+      },
+      {
+        "query": "Is there a scholarship or financial aid policy?",
+        "top_score": 0.7082,
+        "top_ids": [
+          "curated-3ec99c7b98d619da",
+          "dsu-4412d403e16c9af6",
+          "dsu-bfad7d5f4a16b5cf"
+        ],
+        "top_titles": [
+          "Financial assistance",
+          "FAQ's - DHA Suffa University",
+          "Financial Assistance - DHA Suffa University"
+        ]
+      }
+    ]
+  }
+}

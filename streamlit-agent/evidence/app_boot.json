@@ -1,0 +1,26 @@
+{
+  "title": [
+    "DSU Knowledge Assistant"
+  ],
+  "metrics": [
+    {
+      "label": "Indexed chunks",
+      "value": "584"
+    },
+    {
+      "label": "Vector dimensions",
+      "value": "1536"
+    },
+    {
+      "label": "Local store",
+      "value": "FAISS"
+    }
+  ],
+  "exceptions": [],
+  "question_inputs": 1,
+  "tabs": [
+    "Ask the assistant",
+    "Knowledge & pipeline",
+    "Evaluation evidence"
+  ]
+}

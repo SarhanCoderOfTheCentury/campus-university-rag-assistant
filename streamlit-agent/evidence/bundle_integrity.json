@@ -1,0 +1,11 @@
+{
+  "corpus": "dsu",
+  "rows": 584,
+  "dimensions": 1536,
+  "model": "gemini-embedding-001",
+  "fingerprint": "dde3dcc4bf5f245f51edfba3d9b67a27ba2fd3c0423f6e48fb2c650dd2edd7cc",
+  "note": "Supplied embeddings imported; original chunking preserved. Policy dates unverified.",
+  "self_search_index": 0,
+  "self_search_score": 0.9999998807907104,
+  "all_vectors_unit_normalized": true
+}

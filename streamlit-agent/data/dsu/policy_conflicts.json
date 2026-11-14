@@ -1,0 +1,22 @@
+[
+  {
+    "id": "conflict_application_fee",
+    "status": "unresolved_source_conflict",
+    "claim_a": "FAQ: application processing fee Rs. 1,000",
+    "claim_b": "Spring 2027 notice: on-campus Rs. 1,500; online-only undergraduate Rs. 2,500",
+    "source_a": "https://www.dsu.edu.pk/faqs/",
+    "source_b": "https://www.dsu.edu.pk/admission-info/",
+    "effective_date": null,
+    "safe_resolution": "Use Spring 2027 scope only for Spring 2027; for other terms report mismatch and verify."
+  },
+  {
+    "id": "candidate_test_exemption",
+    "status": "different_scope_not_proven_policy_change",
+    "claim_a": "FAQ describes accepted tests and validity/exemption",
+    "claim_b": "Spring 2027 lists additional special entry pathway",
+    "source_a": "https://www.dsu.edu.pk/faqs/",
+    "source_b": "https://www.dsu.edu.pk/admission-info/",
+    "effective_date": null,
+    "safe_resolution": "Do not call this a historical revision without official dated policy versions."
+  }
+]

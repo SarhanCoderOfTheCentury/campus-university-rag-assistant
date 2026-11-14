@@ -1,0 +1,214 @@
+{
+  "answer": "Web Foundations costs PKR 12,000. [02_products_and_services.md]",
+  "sources": [
+    {
+      "chunk_id": "315610c5dcefa11da512",
+      "filename": "02_products_and_services.md",
+      "quote": "Web Foundations costs PKR 12,000",
+      "status": "reference",
+      "version": "2.0",
+      "source_url": ""
+    }
+  ],
+  "status": "answered",
+  "evidence": [
+    {
+      "id": "8df3856f968de0cb4cfc",
+      "filename": "05_operations_and_faqs.md",
+      "version": "2.0",
+      "status": "reference",
+      "effective_date": "2026-01-01",
+      "source_url": "",
+      "text": "# Noor Skills Institute: operations and frequently asked questions\nStatus: reference\nVersion: 2.0\nEffective: 2026-01-01\n\n## Applying for a course\nChoose a course, check its prerequisites, complete the application form, and submit the processing fee. Admissions reviews the form and confirms whether a seat can be offered. The course catalogue supplies tuition fees and learning content. The current policy supplies the processing fee and eligibility rules. To estimate Web Foundations enrollment charges, consult both documents because tuition and application processing are separate charges."
+    },
+    {
+      "id": "315610c5dcefa11da512",
+      "filename": "02_products_and_services.md",
+      "version": "2.0",
+      "status": "reference",
+      "effective_date": "2026-01-01",
+      "source_url": "",
+      "text": "# Noor Skills Institute: courses and services\nStatus: reference\nVersion: 2.0\nEffective: 2026-01-01\n\n## Web Foundations\nWeb Foundations costs PKR 12,000 and lasts 6 weeks. Classes run on Saturdays from 10:00 to 13:00. Learners practise semantic HTML, responsive CSS, and basic browser JavaScript. No previous programming experience is required. The course includes a small personal webpage exercise and feedback on readable code. The fee covers teaching and scheduled laboratory access; it does not include a personal laptop.\n\n## Python Basics\nPython Basics costs PKR 15,000 and lasts 8 weeks. Classes run on Tuesdays and Thursdays from 18:00 to 20:00. Topics include variables, loops, functions, files, and simple debugging. Learners build a command-line utility using fictional input data. Basic computer literacy is required, while previous programming knowledge is optional. This course does not promise advanced machine learning proficiency."
+    },
+    {
+      "id": "058def671c9bc006d733",
+      "filename": "02_products_and_services.md",
+      "version": "2.0",
+      "status": "reference",
+      "effective_date": "2026-01-01",
+      "source_url": "",
+      "text": "## React Essentials\nReact Essentials costs PKR 18,000 and lasts 6 weeks. Learners must already understand JavaScript functions, arrays, and browser events. Lessons cover components, props, state, forms, and routing. The practical project is a small responsive application. The catalogue does not publish an exact timetable for React Essentials, so staff should avoid inventing its teaching days.\n\n## SQL Foundations\nSQL Foundations costs PKR 14,000 and lasts 5 weeks. The course covers table design, filtering, joins, grouping, and basic transactions. Exercises use fictional shop records and a local relational database. It is suitable for learners who understand spreadsheets but have not used SQL before. Database administration and production migration services are outside this course."
+    },
+    {
+      "id": "be530c6d738d7b51df08",
+      "filename": "02_products_and_services.md",
+      "version": "2.0",
+      "status": "reference",
+      "effective_date": "2026-01-01",
+      "source_url": "",
+      "text": "## API Development\nAPI Development costs PKR 20,000 and lasts 8 weeks. Learners need basic Python knowledge. Topics include HTTP methods, request validation, REST endpoints, error handling, and introductory API testing. The final exercise uses a local fictional library service. Public cloud hosting charges and production security audits are not included.\n\n## Software Testing\nSoftware Testing costs PKR 16,000 and lasts 6 weeks. Learners study test cases, boundary values, equivalence classes, defect reports, and small automated unit tests. Basic programming knowledge is recommended. The project evaluates a sample classroom application. It does not certify that a real commercial product is safe to release."
+    },
+    {
+      "id": "de37376383301bc6580d",
+      "filename": "03_current_policy.md",
+      "version": "2.0",
+      "status": "current",
+      "effective_date": "2026-01-01",
+      "source_url": "",
+      "text": "# Noor Skills Institute: admissions and learning policy\nStatus: current\nVersion: 2.0\nEffective: 2026-01-01\n\n## Application processing fee\nThe application processing fee is PKR 1,500 under policy version 2.0. It is separate from the course fee and is not credited against tuition. An application is reviewed after the required form and processing fee are received. Paying a processing fee does not guarantee admission, a seat, or a preferred timetable. Staff must not quote an archived amount for a current application.\n\n## Attendance requirement\nLearners must achieve at least 80% attendance to qualify for the course certificate under version 2.0. Attendance is recorded for scheduled teaching sessions. Completing assignments alone does not replace the attendance requirement. The operations guide explains how a learner requests correction of an incorrect attendance record. No automatic attendance waiver is promised by these documents."
+    }
+  ],
+  "trace": {
+    "method": "hybrid",
+    "eligible": 14,
+    "intent": "current",
+    "semantic_ids": [
+      "3cfd838be9fdf831036c",
+      "058def671c9bc006d733",
+      "be530c6d738d7b51df08",
+      "315610c5dcefa11da512",
+      "8df3856f968de0cb4cfc",
+      "441cd356dc0135dac1d9",
+      "51f277b343db961b77f1",
+      "de37376383301bc6580d",
+      "0fdff4b623fd645e1061",
+      "84c7b76d30458805e5eb",
+      "3005049b4a9d079e5a76",
+      "3749e86e1e71a4400716",
+      "e7b2516bde93404b0c4c",
+      "380acc19ab7304f298e0"
+    ],
+    "keyword_ids": [
+      "8df3856f968de0cb4cfc",
+      "315610c5dcefa11da512",
+      "de37376383301bc6580d",
+      "058def671c9bc006d733",
+      "441cd356dc0135dac1d9",
+      "3005049b4a9d079e5a76",
+      "3749e86e1e71a4400716",
+      "be530c6d738d7b51df08",
+      "0fdff4b623fd645e1061",
+      "51f277b343db961b77f1",
+      "380acc19ab7304f298e0",
+      "3cfd838be9fdf831036c",
+      "e7b2516bde93404b0c4c",
+      "84c7b76d30458805e5eb"
+    ],
+    "query": "How much is Web Foundations tuition?",
+    "conservative_token_bound": 5229,
+    "context_ids": [
+      "8df3856f968de0cb4cfc",
+      "315610c5dcefa11da512",
+      "058def671c9bc006d733",
+      "be530c6d738d7b51df08",
+      "de37376383301bc6580d"
+    ]
+  },
+  "retrieved": [
+    {
+      "id": "8df3856f968de0cb4cfc",
+      "filename": "05_operations_and_faqs.md",
+      "text": "# Noor Skills Institute: operations and frequently asked questions\nStatus: reference\nVersion: 2.0\nEffective: 2026-01-01\n\n## Applying for a course\nChoose a course, check its prerequisites, complete the application form, and submit the processing fee. Admissions reviews the form and confirms whether a seat can be offered. The course catalogue supplies tuition fees and learning content. The current policy supplies the processing fee and eligibility rules. To estimate Web Foundations enrollment charges, consult both documents because tuition and application processing are separate charges.",
+      "cosine": 0.6275920867919922,
+      "bm25": 5.064582044878754,
+      "rrf": 0.03177805800756621,
+      "metadata": {
+        "source": "05_operations_and_faqs.md",
+        "filename": "05_operations_and_faqs.md",
+        "status": "reference",
+        "version": "2.0",
+        "effective_date": "2026-01-01",
+        "superseded_at": "",
+        "source_url": "",
+        "parent_id": "05_operations_and_faqs.md",
+        "start_index": 0,
+        "id": "8df3856f968de0cb4cfc",
+        "position": 12
+      }
+    },
+    {
+      "id": "315610c5dcefa11da512",
+      "filename": "02_products_and_services.md",
+      "text": "# Noor Skills Institute: courses and services\nStatus: reference\nVersion: 2.0\nEffective: 2026-01-01\n\n## Web Foundations\nWeb Foundations costs PKR 12,000 and lasts 6 weeks. Classes run on Saturdays from 10:00 to 13:00. Learners practise semantic HTML, responsive CSS, and basic browser JavaScript. No previous programming experience is required. The course includes a small personal webpage exercise and feedback on readable code. The fee covers teaching and scheduled laboratory access; it does not include a personal laptop.\n\n## Python Basics\nPython Basics costs PKR 15,000 and lasts 8 weeks. Classes run on Tuesdays and Thursdays from 18:00 to 20:00. Topics include variables, loops, functions, files, and simple debugging. Learners build a command-line utility using fictional input data. Basic computer literacy is required, while previous programming knowledge is optional. This course does not promise advanced machine learning proficiency.",
+      "cosine": 0.6426666378974915,
+      "bm25": 4.411721946936315,
+      "rrf": 0.031754032258064516,
+      "metadata": {
+        "source": "02_products_and_services.md",
+        "filename": "02_products_and_services.md",
+        "status": "reference",
+        "version": "2.0",
+        "effective_date": "2026-01-01",
+        "superseded_at": "",
+        "source_url": "",
+        "parent_id": "02_products_and_services.md",
+        "start_index": 0,
+        "id": "315610c5dcefa11da512",
+        "position": 3
+      }
+    },
+    {
+      "id": "058def671c9bc006d733",
+      "filename": "02_products_and_services.md",
+      "text": "## React Essentials\nReact Essentials costs PKR 18,000 and lasts 6 weeks. Learners must already understand JavaScript functions, arrays, and browser events. Lessons cover components, props, state, forms, and routing. The practical project is a small responsive application. The catalogue does not publish an exact timetable for React Essentials, so staff should avoid inventing its teaching days.\n\n## SQL Foundations\nSQL Foundations costs PKR 14,000 and lasts 5 weeks. The course covers table design, filtering, joins, grouping, and basic transactions. Exercises use fictional shop records and a local relational database. It is suitable for learners who understand spreadsheets but have not used SQL before. Database administration and production migration services are outside this course.",
+      "cosine": 0.6678851246833801,
+      "bm25": 2.3478450367441606,
+      "rrf": 0.031754032258064516,
+      "metadata": {
+        "source": "02_products_and_services.md",
+        "filename": "02_products_and_services.md",
+        "status": "reference",
+        "version": "2.0",
+        "effective_date": "2026-01-01",
+        "superseded_at": "",
+        "source_url": "",
+        "parent_id": "02_products_and_services.md",
+        "start_index": 947,
+        "id": "058def671c9bc006d733",
+        "position": 4
+      }
+    },
+    {
+      "id": "be530c6d738d7b51df08",
+      "filename": "02_products_and_services.md",
+      "text": "## API Development\nAPI Development costs PKR 20,000 and lasts 8 weeks. Learners need basic Python knowledge. Topics include HTTP methods, request validation, REST endpoints, error handling, and introductory API testing. The final exercise uses a local fictional library service. Public cloud hosting charges and production security audits are not included.\n\n## Software Testing\nSoftware Testing costs PKR 16,000 and lasts 6 weeks. Learners study test cases, boundary values, equivalence classes, defect reports, and small automated unit tests. Basic programming knowledge is recommended. The project evaluates a sample classroom application. It does not certify that a real commercial product is safe to release.",
+      "cosine": 0.6490349769592285,
+      "bm25": 0.6577607458332793,
+      "rrf": 0.03057889822595705,
+      "metadata": {
+        "source": "02_products_and_services.md",
+        "filename": "02_products_and_services.md",
+        "status": "reference",
+        "version": "2.0",
+        "effective_date": "2026-01-01",
+        "superseded_at": "",
+        "source_url": "",
+        "parent_id": "02_products_and_services.md",
+        "start_index": 2475,
+        "id": "be530c6d738d7b51df08",
+        "position": 6
+      }
+    },
+    {
+      "id": "de37376383301bc6580d",
+      "filename": "03_current_policy.md",
+      "text": "# Noor Skills Institute: admissions and learning policy\nStatus: current\nVersion: 2.0\nEffective: 2026-01-01\n\n## Application processing fee\nThe application processing fee is PKR 1,500 under policy version 2.0. It is separate from the course fee and is not credited against tuition. An application is reviewed after the required form and processing fee are received. Paying a processing fee does not guarantee admission, a seat, or a preferred timetable. Staff must not quote an archived amount for a current application.\n\n## Attendance requirement\nLearners must achieve at least 80% attendance to qualify for the course certificate under version 2.0. Attendance is recorded for scheduled teaching sessions. Completing assignments alone does not replace the attendance requirement. The operations guide explains how a learner requests correction of an incorrect attendance record. No automatic attendance waiver is promised by these documents.",
+      "cosine": 0.5816705226898193,
+      "bm25": 3.95081521509148,
+      "rrf": 0.03057889822595705,
+      "metadata": {
+        "source": "03_current_policy.md",
+        "filename": "03_current_policy.md",
+        "status": "current",
+        "version": "2.0",
+        "effective_date": "2026-01-01",
+        "superseded_at": "",
+        "source_url": "",
+        "parent_id": "03_current_policy.md",
+        "start_index": 0,
+        "id": "de37376383301bc6580d",
+        "position": 7
+      }
+    }
+  ]
+}
