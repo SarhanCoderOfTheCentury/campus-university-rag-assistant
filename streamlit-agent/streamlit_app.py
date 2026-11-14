@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 import streamlit as st
 from dotenv import load_dotenv
 from rag.config import ROOT, Settings
@@ -28,9 +29,10 @@ def secret(name):
 
 
 @st.cache_resource(show_spinner=False)
-def resources(settings, revision, _api_key):
-    # Provider key is excluded from Streamlit's shared cache hash; cached objects
-    # are only the deployment's configured credential, never visitor-entered keys.
+def resources(settings, revision, key_revision, _api_key):
+    # Never place the secret itself in Streamlit's cache key. A one-way revision
+    # invalidates cached provider clients after credential rotation without
+    # exposing the credential in cache metadata.
     embeddings = GeminiEmbeddings(_api_key)
     store, chunks, manifest = load_corpus(settings, embeddings)
     return RAGAgent(settings, embeddings, store, chunks, api_key=_api_key), manifest
@@ -73,8 +75,9 @@ if not key:
     st.stop()
 try:
     revision = fingerprint(ROOT / 'knowledge/demo', size, overlap) if corpus=='demo' else 'dsu-supplied-v1'
+    key_revision = hashlib.sha256(key.encode('utf-8')).hexdigest()[:16]
     with st.spinner('Loading the local knowledge index…'):
-        agent, manifest = resources(settings, revision, key)
+        agent, manifest = resources(settings, revision, key_revision, key)
 except Exception as exc:
     st.error(safe_error(exc))
     st.stop()

@@ -71,12 +71,23 @@ def safe_error(exc):
     # Do not return exception strings: provider errors can contain request URLs,
     # prompts, headers or credentials.
     name = type(exc).__name__.lower()
-    if 'modelnotfound' in name:
+    code = getattr(exc, 'status_code', None) or getattr(exc, 'code', None)
+    try:
+        code = int(code) if code is not None else None
+    except (TypeError, ValueError):
+        code = None
+    if code == 404 or 'modelnotfound' in name:
         return 'The configured Gemini model is unavailable for this API key. Set GEMINI_MODEL to an accessible model and restart.'
-    if 'resourceexhausted' in name or 'ratelimit' in name:
+    if code == 429 or 'resourceexhausted' in name or 'ratelimit' in name:
         return 'Gemini quota is exhausted. Wait, check your free-tier quota, then retry.'
-    if 'invalidargument' in name or 'authentication' in name or 'permission' in name:
-        return 'Gemini rejected the request. Check your API key, model access and API restrictions.'
+    if code == 401 or 'authentication' in name:
+        return 'Gemini authentication failed. Re-save GEMINI_API_KEY in this Streamlit app\'s Secrets, then reboot the app.'
+    if code == 403 or 'permission' in name:
+        return 'Gemini denied this project or key. In Google AI Studio, verify the key is active and restricted to the Gemini API.'
+    if code == 400 or 'invalidargument' in name:
+        return 'Gemini rejected the request configuration. Check the selected model and API-key restrictions.'
+    if 'timeout' in name or 'connection' in name or 'network' in name:
+        return 'The Gemini service could not be reached from the deployment. Retry once, then check Streamlit logs for a timeout or connection failure.'
     return 'The Gemini request could not complete. Check the API key, quota and network, then retry.'
 
 

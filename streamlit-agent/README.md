@@ -165,6 +165,7 @@ Restart Streamlit after replacing supplied DSU data. The original 584-row integr
 | --- | --- |
 | Missing API key | Set server environment variable, local `.env`, or Streamlit secrets; restart the app |
 | Model unavailable | Set `GEMINI_MODEL` to a model your key can actually call |
+| Error continues after rotating a key | Re-save the app Secrets and reboot the Streamlit app. The cache uses a non-reversible key revision so rotated credentials create fresh Gemini clients. |
 | Quota/rate-limit message | Check Gemini quota, wait, then retry; batch evaluation includes pacing |
 | Citation validation refusal | Inspect retrieved evidence; try a more specific question or higher k; the app will not invent an excerpt |
 | Wrong vector dimensions | Restore the original matrix/metadata pair or rebuild both with the same embedding contract |
