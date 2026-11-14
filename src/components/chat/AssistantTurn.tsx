@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { MessageFooter, MessageHeader } from '@/components/ui/message'
 import { Spinner } from '@/components/ui/spinner'
-import { DimensionalIcon } from '@/components/education/DimensionalIcon'
+import { InterfaceIcon } from '@/components/education/InterfaceIcon'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Trace, TraceCollapsible, TraceCollapsibleContent, TraceCollapsibleTrigger, TraceDescription, TraceIcon, TraceLine, TraceTitle } from '@/components/ui/trace'
 import { safeSourceUrl, type EvidenceSource } from '@/lib/rag/protocol'
@@ -58,7 +58,7 @@ export function AssistantTurn({ run, onOpenChange, onInspect }: Props) {
       <TraceCollapsible open={run.reasoningOpen} onOpenChange={onOpenChange}>
         <TraceCollapsibleTrigger aria-label={`${title}. ${run.reasoningOpen ? 'Collapse' : 'Expand'} activity`}>
           <TraceLine status={busy ? 'running' : failed ? 'error' : undefined}>
-            <TraceIcon>{busy ? <Spinner aria-label="Request is active" /> : <DimensionalIcon icon={failed ? TriangleAlertIcon : CircleCheckIcon} size="xs" tone={failed ? 'rose' : 'sage'} />}</TraceIcon>
+            <TraceIcon>{busy ? <Spinner aria-label="Request is active" /> : <InterfaceIcon icon={failed ? TriangleAlertIcon : CircleCheckIcon} size="xs" />}</TraceIcon>
             <TraceTitle className="text-xs">{title}</TraceTitle>
             {run.elapsedMs !== undefined && <TraceDescription className="text-[10px]">{(run.elapsedMs/1000).toFixed(1)}s</TraceDescription>}
           </TraceLine>
@@ -69,14 +69,14 @@ export function AssistantTurn({ run, onOpenChange, onInspect }: Props) {
             {run.activities.map(step => <TraceCollapsible key={step.id}>
               <TraceCollapsibleTrigger>
                 <TraceLine status={step.status === 'running' ? 'running' : step.status === 'failed' ? 'error' : step.status === 'interrupted' ? 'pending' : undefined} className="flex-wrap gap-y-1">
-                  <TraceIcon>{step.status === 'running' ? <Spinner /> : <DimensionalIcon icon={step.status === 'interrupted' ? CirclePauseIcon : step.status === 'failed' ? TriangleAlertIcon : step.kind === 'document' || step.kind === 'discovery' ? FileTextIcon : step.kind === 'retrieval' ? SearchIcon : SparklesIcon} size="xs" tone={step.status === 'failed' ? 'rose' : step.kind === 'summary' ? 'gold' : 'sage'} />}</TraceIcon>
+                  <TraceIcon>{step.status === 'running' ? <Spinner /> : <InterfaceIcon icon={step.status === 'interrupted' ? CirclePauseIcon : step.status === 'failed' ? TriangleAlertIcon : step.kind === 'document' || step.kind === 'discovery' ? FileTextIcon : step.kind === 'retrieval' ? SearchIcon : SparklesIcon} size="xs" />}</TraceIcon>
                   <TraceTitle className="text-xs">{step.label}</TraceTitle>
                   <TraceDescription className="text-[10px]">{step.status === 'running' ? 'In progress' : step.status === 'completed' ? 'Completed' : step.status === 'failed' ? 'Failed' : 'Interrupted'}</TraceDescription>
                 </TraceLine>
               </TraceCollapsibleTrigger>
               <TraceCollapsibleContent keepMounted className="space-y-2 text-xs leading-6">
                 {step.detail && <p className="whitespace-pre-wrap">{step.detail}</p>}
-                {step.sourceIds?.map(id => run.sources[id]).filter(Boolean).map(source => <Button key={source.source_id} variant="ghost" size="sm" className="h-auto max-w-full justify-start gap-2 whitespace-normal border-0 px-0 py-1 text-left text-[11px]" onClick={() => onInspect(source)}><DimensionalIcon icon={FileTextIcon} size="xs" tone="gold" /><span>[{source.citation_number}] {sourceTitle(source)}{sourceLocation(source) ? ` · ${sourceLocation(source)}` : ''}</span></Button>)}
+                {step.sourceIds?.map(id => run.sources[id]).filter(Boolean).map(source => <Button key={source.source_id} variant="ghost" size="sm" className="h-auto max-w-full justify-start gap-2 whitespace-normal border-0 px-0 py-1 text-left text-[11px]" onClick={() => onInspect(source)}><InterfaceIcon icon={FileTextIcon} size="xs" /><span>[{source.citation_number}] {sourceTitle(source)}{sourceLocation(source) ? ` · ${sourceLocation(source)}` : ''}</span></Button>)}
                 {!step.detail && !step.sourceIds?.length && <p>No additional detail was provided by the agent.</p>}
               </TraceCollapsibleContent>
             </TraceCollapsible>)}
@@ -95,9 +95,9 @@ export function AssistantTurn({ run, onOpenChange, onInspect }: Props) {
     {run.error && run.activities.length > 0 && <p role="alert" className="text-xs leading-6 text-destructive">{run.error.message}</p>}
     {failed && run.blocks.length > 0 && <p className="text-[11px] text-muted-foreground">This is an incomplete response. The received text and evidence have been preserved.</p>}
     {sources.length > 0 ? <Trace><TraceCollapsible>
-      <TraceCollapsibleTrigger><TraceLine><TraceIcon><DimensionalIcon icon={FileTextIcon} size="xs" tone="gold" /></TraceIcon><TraceTitle className="text-xs">Sources · {sources.length}</TraceTitle></TraceLine></TraceCollapsibleTrigger>
+      <TraceCollapsibleTrigger><TraceLine><TraceIcon><InterfaceIcon icon={FileTextIcon} size="xs" /></TraceIcon><TraceTitle className="text-xs">Sources · {sources.length}</TraceTitle></TraceLine></TraceCollapsibleTrigger>
       <TraceCollapsibleContent keepMounted><Trace className="gap-3">{sources.map(source => <TraceCollapsible key={source.source_id}>
-        <TraceCollapsibleTrigger><TraceLine><TraceIcon><DimensionalIcon icon={FileTextIcon} size="xs" tone="gold" /></TraceIcon><TraceTitle className="text-xs">[{source.citation_number}] {sourceTitle(source)}</TraceTitle>{sourceLocation(source) && <TraceDescription className="max-w-40 truncate text-[10px]">{sourceLocation(source)}</TraceDescription>}</TraceLine></TraceCollapsibleTrigger>
+        <TraceCollapsibleTrigger><TraceLine><TraceIcon><InterfaceIcon icon={FileTextIcon} size="xs" /></TraceIcon><TraceTitle className="text-xs">[{source.citation_number}] {sourceTitle(source)}</TraceTitle>{sourceLocation(source) && <TraceDescription className="max-w-40 truncate text-[10px]">{sourceLocation(source)}</TraceDescription>}</TraceLine></TraceCollapsibleTrigger>
         <TraceCollapsibleContent keepMounted className="space-y-2 text-xs leading-6"><p>{source.excerpt}</p>{sourceLocation(source) && <p className="text-[10px]">{sourceLocation(source)}</p>}<div className="flex flex-wrap items-center gap-3"><Button variant="link" size="sm" onClick={() => onInspect(source)} className="h-auto p-0 text-xs">Inspect evidence</Button>{safeSourceUrl(source.url) ? <a href={safeSourceUrl(source.url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs underline underline-offset-4">Open document<ArrowUpRightIcon className="size-3" /><span className="sr-only"> (opens in a new tab)</span></a> : <span className="text-[10px]">No document link was provided.</span>}</div></TraceCollapsibleContent>
       </TraceCollapsible>)}</Trace></TraceCollapsibleContent>
     </TraceCollapsible></Trace> : !busy && <p className="text-[11px] leading-5 text-muted-foreground">{run.outcome === 'no_evidence' ? 'No supporting document sources were found for this question.' : run.status === 'completed' ? 'No supporting document sources were cited for this response.' : 'No supporting document sources were received before this request stopped.'}</p>}

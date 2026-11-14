@@ -120,71 +120,6 @@
   button, a, textarea { -webkit-tap-highlight-color: transparent; }
 }
 
-/* Raised icon tiles: depth is visual only and never replaces shadcn behavior. */
-.dimensional-icon {
-  --icon-top: hsl(99 36% 96%);
-  --icon-bottom: hsl(96 29% 83%);
-  --icon-ink: hsl(104 23% 28%);
-  --icon-shadow: hsl(101 22% 45% / 0.34);
-  position: relative;
-  isolation: isolate;
-  display: inline-grid;
-  flex: none;
-  place-items: center;
-  color: var(--icon-ink);
-  background: linear-gradient(145deg, var(--icon-top) 8%, var(--icon-bottom) 92%);
-  box-shadow:
-    inset 1px 1px 0 hsl(0 0% 100% / 0.88),
-    inset -1px -2px 3px hsl(100 18% 28% / 0.14),
-    0 7px 12px -8px var(--icon-shadow),
-    0 2px 3px hsl(100 18% 20% / 0.12);
-  transform: perspective(90px) rotateX(4deg) rotateY(-5deg) translateY(-1px);
-  transform-style: preserve-3d;
-}
-.dimensional-icon::after {
-  position: absolute;
-  z-index: -1;
-  right: 3px;
-  bottom: -3px;
-  left: 3px;
-  height: 5px;
-  border-radius: 0 0 8px 8px;
-  background: color-mix(in srgb, var(--icon-bottom), black 15%);
-  content: '';
-  filter: blur(.1px);
-}
-.dimensional-icon__shine {
-  position: absolute;
-  inset: 2px 3px 48% 3px;
-  border-radius: inherit;
-  background: linear-gradient(180deg, hsl(0 0% 100% / .72), transparent);
-  pointer-events: none;
-}
-.dimensional-icon__glyph {
-  position: relative;
-  z-index: 1;
-  filter: drop-shadow(0 1px 0 hsl(0 0% 100% / .7)) drop-shadow(0 2px 1px hsl(100 25% 20% / .18));
-  transform: translateZ(6px);
-}
-.dimensional-icon[data-tone='gold'] {
-  --icon-top: hsl(49 75% 96%);
-  --icon-bottom: hsl(43 68% 78%);
-  --icon-ink: hsl(38 49% 30%);
-  --icon-shadow: hsl(39 53% 43% / .34);
-}
-.dimensional-icon[data-tone='ink'] {
-  --icon-top: hsl(215 16% 94%);
-  --icon-bottom: hsl(216 14% 75%);
-  --icon-ink: hsl(215 24% 22%);
-  --icon-shadow: hsl(215 24% 20% / .3);
-}
-.dimensional-icon[data-tone='rose'] {
-  --icon-top: hsl(9 67% 96%);
-  --icon-bottom: hsl(8 56% 82%);
-  --icon-ink: hsl(7 42% 34%);
-  --icon-shadow: hsl(7 44% 42% / .3);
-}
-.dark .dimensional-icon { filter: brightness(.82) saturate(.9); }
 
 /* No browser/shadcn outline rings. Focus remains visible through surface lift. */
 .app-shell :where(button, a, input, textarea, [role='button']):focus-visible {
@@ -206,7 +141,7 @@
   box-shadow: 0 24px 55px -34px hsl(215 28% 17% / .58), 0 5px 16px hsl(215 24% 20% / .07), inset 0 1px hsl(0 0% 100% / .9);
 }
 @media (prefers-reduced-motion: reduce) {
-  .dimensional-icon, .dimensional-icon__glyph, .app-shell :where([data-slot='button'], [data-slot='sidebar-menu-button'], [data-slot='trace-collapsible-trigger']):focus-visible, .prompt-surface:has([data-slot='input-group-control']:focus-visible) { transform: none; }
+  .app-shell :where([data-slot='button'], [data-slot='sidebar-menu-button'], [data-slot='trace-collapsible-trigger']):focus-visible, .prompt-surface:has([data-slot='input-group-control']:focus-visible) { transform: none; }
 }
 
 /* The welcome view is a fitted canvas. Only real conversations mount a scroller. */

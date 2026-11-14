@@ -55,7 +55,7 @@ Vercel preview URLs change between deployments. If you use browser cookies acros
 - Explicitly reports a backend `no_evidence` result. Connection failures say that no supporting sources were received, without claiming a search was performed.
 - Stop generating or Escape cancels the active request. A new submission in the same conversation cancels its predecessor; different conversations remain isolated. Unmount cleans up streams, timers and listeners.
 
-The existing headerless layout, sidebar toggle, Google Sans, Remotion SVG logo/educational artwork, reduced-motion handling, and appearance controls remain. Flat outlined controls have been replaced with borderless raised surfaces and dimensional icon tiles. Keyboard focus still receives a subtle surface lift without adding an outline or ring. The welcome state mounts no message scroller and fits the viewport; chat messages scroll after submission. Conversations and drafts are in memory and reset on reload. Only completed exchanges are sent as history; history is never treated as document evidence.
+The existing headerless layout, sidebar toggle, Google Sans, Remotion SVG logo/educational artwork, reduced-motion handling, and appearance controls remain. Interface icons use clean Lucide SVGs with consistent strokes and no 3D effects. Controls use borderless raised surfaces. Keyboard focus still receives a subtle surface lift without adding an outline or ring. The welcome state mounts no message scroller and fits the viewport; chat messages scroll after submission. Conversations and drafts are in memory and reset on reload. Only completed exchanges are sent as history; history is never treated as document evidence.
 
 ## Official shadcn components
 
