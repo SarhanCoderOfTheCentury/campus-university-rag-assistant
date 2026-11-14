@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+.vercel/
+*.tsbuildinfo
+.DS_Store
+.openai/artifacts/
+.openai/registry-cache/
+
+# Python development state
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/

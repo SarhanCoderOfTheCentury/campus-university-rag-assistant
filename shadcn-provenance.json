@@ -1,0 +1,294 @@
+{
+  "style": "base-nova",
+  "source": "https://ui.shadcn.com",
+  "files": [
+    {
+      "component": "sidebar",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/sidebar.json",
+      "registry_path": "registry/base-nova/ui/sidebar.tsx",
+      "local_path": "src/components/ui/sidebar.tsx",
+      "source_sha256": "d08ce0624ed0a9a5ecb35698dadd11fe12ca87dd7dc78e02e7c5d9b7b5485a70",
+      "installed_sha256": "cba1bab241e0ea0fa724d8963b44ab9f2751c74de2c86cb08d1576d3dcce5c52",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "message-scroller",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/message-scroller.json",
+      "registry_path": "registry/base-nova/ui/message-scroller.tsx",
+      "local_path": "src/components/ui/message-scroller.tsx",
+      "source_sha256": "aacf4a03cb083bf009758e88faaacb4d8e407506a22aa0841dcc83f6f2b47133",
+      "installed_sha256": "95cf0755c353599601f8a5b1ec4dbaac6a16ee29bb200d3d5f5987d9740d73c9",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "message",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/message.json",
+      "registry_path": "registry/base-nova/ui/message.tsx",
+      "local_path": "src/components/ui/message.tsx",
+      "source_sha256": "64e9ae0f9d1e268b0ed7b738a53d374d273fe1e7e2dd7b35ad7417e50a9bbe6c",
+      "installed_sha256": "64e9ae0f9d1e268b0ed7b738a53d374d273fe1e7e2dd7b35ad7417e50a9bbe6c",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "bubble",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/bubble.json",
+      "registry_path": "registry/base-nova/ui/bubble.tsx",
+      "local_path": "src/components/ui/bubble.tsx",
+      "source_sha256": "cef49b9490c90d90451037247adedb8671eae234d388f8c30c7b2eac37356983",
+      "installed_sha256": "cef49b9490c90d90451037247adedb8671eae234d388f8c30c7b2eac37356983",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "trace",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/trace.json",
+      "registry_path": "registry/base-nova/ui/trace.tsx",
+      "local_path": "src/components/ui/trace.tsx",
+      "source_sha256": "caf842955e70affef04f8082f54d90e027e1f267d2eb3ba8b69290ed7a6ac924",
+      "installed_sha256": "db44cd74784b05c999b8dd56282445ae61dcf5f1a14ab06758ad678fb44b493b",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "input-group",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/input-group.json",
+      "registry_path": "registry/base-nova/ui/input-group.tsx",
+      "local_path": "src/components/ui/input-group.tsx",
+      "source_sha256": "d6c74e82a2aa02980b337da519fc5b74dfc841e92453e32dd241e6baa1d9d9a6",
+      "installed_sha256": "7e768d41f247b1a4a3b0d214453dbeb1c2150aba500f5c0037b0285dfbe6a899",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "hover-card",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/hover-card.json",
+      "registry_path": "registry/base-nova/ui/hover-card.tsx",
+      "local_path": "src/components/ui/hover-card.tsx",
+      "source_sha256": "dbac09bf55d501e4f22e52dffe298f009b8cce8f1539902b3104a5c029163d0c",
+      "installed_sha256": "dbac09bf55d501e4f22e52dffe298f009b8cce8f1539902b3104a5c029163d0c",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "badge",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/badge.json",
+      "registry_path": "registry/base-nova/ui/badge.tsx",
+      "local_path": "src/components/ui/badge.tsx",
+      "source_sha256": "d9fb280e266119c4b62a4c518e63152de27b094c68d3e5f8929d05bfb0c1bc6c",
+      "installed_sha256": "d9fb280e266119c4b62a4c518e63152de27b094c68d3e5f8929d05bfb0c1bc6c",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "kbd",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/kbd.json",
+      "registry_path": "registry/base-nova/ui/kbd.tsx",
+      "local_path": "src/components/ui/kbd.tsx",
+      "source_sha256": "d17724eb15923ea4f0432cd1cf22538addb14a386f4f9326661efcce7f97e33b",
+      "installed_sha256": "d17724eb15923ea4f0432cd1cf22538addb14a386f4f9326661efcce7f97e33b",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "empty",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/empty.json",
+      "registry_path": "registry/base-nova/ui/empty.tsx",
+      "local_path": "src/components/ui/empty.tsx",
+      "source_sha256": "5cac88b6f80f40cf4aa5e4c3d5a6810f43e132a24032d1c55a7aecdae446cf15",
+      "installed_sha256": "5cac88b6f80f40cf4aa5e4c3d5a6810f43e132a24032d1c55a7aecdae446cf15",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "item",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/item.json",
+      "registry_path": "registry/base-nova/ui/item.tsx",
+      "local_path": "src/components/ui/item.tsx",
+      "source_sha256": "53baca07a17899f0746a99c56881be323b6fc2f263491cd0b4b3c9d2bf3acdd0",
+      "installed_sha256": "08cc237a727e1b0d1de24ca60ca49fcf44ad3923620c71b6c70ab16ac2f575b6",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "sheet",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/sheet.json",
+      "registry_path": "registry/base-nova/ui/sheet.tsx",
+      "local_path": "src/components/ui/sheet.tsx",
+      "source_sha256": "7db65922fb40d9a1204527620b7469040259758595ae871bd7274305398c03de",
+      "installed_sha256": "4d8ff312745e222e5304ede61639baf0c62247b9eaeaa3e630e3595869945211",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "tooltip",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/tooltip.json",
+      "registry_path": "registry/base-nova/ui/tooltip.tsx",
+      "local_path": "src/components/ui/tooltip.tsx",
+      "source_sha256": "f83d5f511812573f4ac98b866d397a46fda0f27eeb0af0ea89af01969eefbc5a",
+      "installed_sha256": "f83d5f511812573f4ac98b866d397a46fda0f27eeb0af0ea89af01969eefbc5a",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "separator",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/separator.json",
+      "registry_path": "registry/base-nova/ui/separator.tsx",
+      "local_path": "src/components/ui/separator.tsx",
+      "source_sha256": "9a80ff8c110e0c55489509f4f82ebcc929c0174b59544047147b7134f86a54e7",
+      "installed_sha256": "9a80ff8c110e0c55489509f4f82ebcc929c0174b59544047147b7134f86a54e7",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "collapsible",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/collapsible.json",
+      "registry_path": "registry/base-nova/ui/collapsible.tsx",
+      "local_path": "src/components/ui/collapsible.tsx",
+      "source_sha256": "ead4349ff7b01d696ef89294a81d18ee1d3f732321398896462c834ab9b9e065",
+      "installed_sha256": "ead4349ff7b01d696ef89294a81d18ee1d3f732321398896462c834ab9b9e065",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "input",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/input.json",
+      "registry_path": "registry/base-nova/ui/input.tsx",
+      "local_path": "src/components/ui/input.tsx",
+      "source_sha256": "dab990dfefa0ba78854ab6602ad074270dba9d7d1262184d9bfbb62bd990903b",
+      "installed_sha256": "dab990dfefa0ba78854ab6602ad074270dba9d7d1262184d9bfbb62bd990903b",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "skeleton",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/skeleton.json",
+      "registry_path": "registry/base-nova/ui/skeleton.tsx",
+      "local_path": "src/components/ui/skeleton.tsx",
+      "source_sha256": "4c2af7fa9c645358a0fb188779deab6f0b981733b62befc25e18aaebea1350dc",
+      "installed_sha256": "4c2af7fa9c645358a0fb188779deab6f0b981733b62befc25e18aaebea1350dc",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "textarea",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/textarea.json",
+      "registry_path": "registry/base-nova/ui/textarea.tsx",
+      "local_path": "src/components/ui/textarea.tsx",
+      "source_sha256": "82601c91ffc6c727d924162c78d7cb853114bcced4e2eb922a68ca12d4239c0f",
+      "installed_sha256": "82601c91ffc6c727d924162c78d7cb853114bcced4e2eb922a68ca12d4239c0f",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "use-mobile",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/use-mobile.json",
+      "registry_path": "registry/base-nova/hooks/use-mobile.ts",
+      "local_path": "src/hooks/use-mobile.ts",
+      "source_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "installed_sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "spinner",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/spinner.json",
+      "registry_path": "registry/base-nova/ui/spinner.tsx",
+      "local_path": "src/components/ui/spinner.tsx",
+      "source_sha256": "494f71fd2733709d0e43be44e3353d9df215b370137af0195251cbdfdcc9e17b",
+      "installed_sha256": "81ea75b2a0815fb0a026c7ec000a0d2b1fe52edfa3f157a1fb0ccbd3c126f764",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "code-block",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/code-block.json",
+      "registry_path": "registry/base-nova/ui/code-block.tsx",
+      "local_path": "src/components/ui/code-block.tsx",
+      "source_sha256": "226b3c2e6114a8e1adaf5d594276ce0bcc92da80a6c85dfdc20478eccfbf7657",
+      "installed_sha256": "9411b386d614ecf0837ecd7c2e6ea8bbe33bfad3ffa7b4a9d97f060c597f8e38",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "button",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/button.json",
+      "registry_path": "registry/base-nova/ui/button.tsx",
+      "local_path": "src/components/ui/button.tsx",
+      "source_sha256": "313353436d0fcc8e44ab470adb614b9fd013d28626f624328ea0d66d41a6c81b",
+      "installed_sha256": "313353436d0fcc8e44ab470adb614b9fd013d28626f624328ea0d66d41a6c81b",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "use-highlighted-code",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/use-highlighted-code.json",
+      "registry_path": "registry/base-nova/hooks/use-highlighted-code.ts",
+      "local_path": "src/hooks/use-highlighted-code.ts",
+      "source_sha256": "289f262ccce5c36040e2c9b9fbaad04354ca6fb036186bf2180cf1e711a48d3e",
+      "installed_sha256": "52c87d08f21b66b45ae7b724c9e1bd20694dd86ff75ee03e9ff35aa7af5461e0",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    },
+    {
+      "component": "use-highlighted-code",
+      "registry_url": "https://ui.shadcn.com/r/styles/base-nova/use-highlighted-code.json",
+      "registry_path": "registry/base-nova/lib/highlighter.tsx",
+      "local_path": "src/lib/highlighter.tsx",
+      "source_sha256": "ab3cfd4e09735bf90735e851dfe5bc4f17151f3f36b9d4d55e9cd809b1aa2b9c",
+      "installed_sha256": "ab3cfd4e09735bf90735e851dfe5bc4f17151f3f36b9d4d55e9cd809b1aa2b9c",
+      "changes": [
+        "Registry imports mapped to local project paths",
+        "Official Lucide icon selected from registry placeholders"
+      ]
+    }
+  ]
+}

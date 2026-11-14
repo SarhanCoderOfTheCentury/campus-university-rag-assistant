@@ -1,0 +1,174 @@
+[
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 1,
+    "type": "started"
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 2,
+    "type": "retrieval_started",
+    "retrieval_id": "01a1d7e0-851a-75af-af16-c959b0c0a5db",
+    "label": "Searching university documents"
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 3,
+    "type": "document_found",
+    "retrieval_id": "01a1d7e0-851a-75af-af16-c959b0c0a5db",
+    "source": {
+      "source_id": "fixture-source-1",
+      "document_id": "fixture-document",
+      "chunk_id": "fixture-chunk-1",
+      "citation_number": 1,
+      "title": "[TEST FIXTURE] Handbook",
+      "url": "/test-documents/fixture-document",
+      "page_start": 2,
+      "section": "Fixture section",
+      "excerpt": "[TEST FIXTURE] The library opens at 09:00."
+    }
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 4,
+    "type": "document_reading",
+    "activity_id": "read:fixture-source-1",
+    "document_id": "fixture-document",
+    "source_ids": [
+      "fixture-source-1"
+    ],
+    "detail": "Preparing the retrieved passage for the answer context."
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 5,
+    "type": "document_processed",
+    "activity_id": "read:fixture-source-1",
+    "document_id": "fixture-document",
+    "detail": "Retrieved passage included in the answer context."
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 6,
+    "type": "retrieval_completed",
+    "retrieval_id": "01a1d7e0-851a-75af-af16-c959b0c0a5db",
+    "source_ids": [
+      "fixture-source-1"
+    ],
+    "summary": "Retrieved 1 distinct evidence passages."
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 7,
+    "type": "reasoning_update",
+    "activity_id": "prepare-answer",
+    "label": "Preparing a source-grounded response",
+    "status": "running",
+    "summary": "Using 1 retrieved passages. Only verified claims can be displayed."
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 8,
+    "type": "answer_delta",
+    "block_id": "claim-0",
+    "delta": "[TEST FIXTURE] The librar",
+    "source_ids": [
+      "fixture-source-1"
+    ],
+    "kind": "grounded"
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 9,
+    "type": "answer_delta",
+    "block_id": "claim-0",
+    "delta": "y opens at 09:00.",
+    "source_ids": [
+      "fixture-source-1"
+    ],
+    "kind": "grounded"
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 10,
+    "type": "reasoning_update",
+    "activity_id": "prepare-answer",
+    "label": "Prepared a source-grounded response",
+    "status": "completed",
+    "summary": "Verified 1 answer passages against retrieved evidence."
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 11,
+    "type": "sources",
+    "sources": [
+      {
+        "source_id": "fixture-source-1",
+        "document_id": "fixture-document",
+        "chunk_id": "fixture-chunk-1",
+        "citation_number": 1,
+        "title": "[TEST FIXTURE] Handbook",
+        "url": "/test-documents/fixture-document",
+        "page_start": 2,
+        "section": "Fixture section",
+        "excerpt": "[TEST FIXTURE] The library opens at 09:00."
+      }
+    ],
+    "final": true
+  },
+  {
+    "protocol_version": 1,
+    "conversation_id": "fixture-conversation",
+    "request_id": "fixture-request",
+    "message_id": "fixture-message",
+    "run_id": "fixture-backend-run",
+    "sequence": 12,
+    "type": "completed",
+    "outcome": "answered",
+    "elapsed_ms": 0
+  }
+]
