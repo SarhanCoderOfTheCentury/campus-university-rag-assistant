@@ -11,7 +11,7 @@ import { Message, MessageAvatar, MessageContent } from '@/components/ui/message'
 import { MessageScroller, MessageScrollerButton, MessageScrollerContent, MessageScrollerItem, MessageScrollerProvider, MessageScrollerViewport } from '@/components/ui/message-scroller'
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarInset, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, useSidebar } from '@/components/ui/sidebar'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { starterQuestions } from '@/data/questions'
 import { useRagChat } from '@/hooks/use-rag-chat'
@@ -27,6 +27,11 @@ const EducationalMotion = lazy(() => import('@/components/education/EducationalM
 
 /** Page assembly only. Every UI primitive is fetched from the official shadcn registry. */
 export default function App() {
+  return <TooltipProvider><SidebarProvider className="app-shell h-dvh min-h-0 overflow-hidden" style={{ '--sidebar-width': '16rem' } as React.CSSProperties}><CampusAssistant /></SidebarProvider></TooltipProvider>
+}
+
+function CampusAssistant() {
+  const { setOpen, setOpenMobile } = useSidebar()
   const { conversations, session, backendConfigured } = useRagChat()
   const [activeId, setActiveId] = useState('new-conversation')
   const [drafts, setDrafts] = useState<Record<string, string>>({})
@@ -43,7 +48,11 @@ export default function App() {
   const inspectedMessage = conversations.flatMap(chat => chat.messages).find((message): message is AssistantMessage => message.role === 'assistant' && message.run.request.request_id === inspectorRequestId)
   const inspectorSources = inspectedMessage ? Object.values(inspectedMessage.run.sources).sort((a, b) => a.citation_number - b.citation_number) : []
 
-  function newChat() { setActiveId(session.newConversation()) }
+  function newChat() {
+    setActiveId(session.newConversation())
+    setOpen(false)
+    setOpenMobile(false)
+  }
 
   function inspectSource(source: EvidenceSource, requestId: string) {
     setInspectorRequestId(requestId); setSelectedSource(source.source_id); setSourcesOpen(true)
@@ -67,8 +76,7 @@ export default function App() {
   }
 
   return (
-    <TooltipProvider>
-      <SidebarProvider className="app-shell h-dvh min-h-0 overflow-hidden" style={{ '--sidebar-width': '16rem' } as React.CSSProperties}>
+    <>
         <Sidebar collapsible="icon" className="border-r border-border/70">
           <SidebarHeader className="px-4 pt-5 pb-4 group-data-[collapsible=icon]:px-2">
             <div className="flex min-w-0 items-center gap-2 group-data-[collapsible=icon]:flex-col">
@@ -82,7 +90,7 @@ export default function App() {
               </SidebarMenu>
               <SidebarTrigger className="shrink-0 text-muted-foreground" />
             </div>
-            <SidebarMenu className="mt-5 group-data-[collapsible=icon]:mt-3"><SidebarMenuItem><SidebarMenuButton aria-label="New conversation" onClick={newChat} tooltip="New conversation" className="h-10 gap-2.5 border-0 bg-background font-normal shadow-[0_8px_24px_-16px_rgba(15,23,42,.55),0_2px_7px_rgba(15,23,42,.06)]"><InterfaceIcon icon={PlusIcon} size="xs" /><span>New conversation</span></SidebarMenuButton></SidebarMenuItem></SidebarMenu>
+            <SidebarMenu className="mt-5 group-data-[collapsible=icon]:mt-3"><SidebarMenuItem><SidebarMenuButton aria-label="New conversation" onClick={newChat} tooltip="New conversation" className="h-10 gap-2.5 border-0 bg-background font-normal shadow-none"><InterfaceIcon icon={PlusIcon} size="xs" /><span>New conversation</span></SidebarMenuButton></SidebarMenuItem></SidebarMenu>
           </SidebarHeader>
           <SidebarContent className="gap-6 px-2 group-data-[collapsible=icon]:px-0">
             <SidebarGroup>
@@ -115,7 +123,7 @@ export default function App() {
           </SidebarFooter>
         </Sidebar>
 
-        <div className="fixed top-3 left-3 z-30 md:hidden"><SidebarTrigger aria-label="Open sidebar" className="border-0 bg-sidebar shadow-[0_8px_24px_-12px_rgba(15,23,42,.35)]" /></div>
+        <div className="fixed top-3 left-3 z-30 md:hidden"><SidebarTrigger aria-label="Open sidebar" className="border-0 bg-sidebar shadow-none" /></div>
         <SidebarInset aria-label="University assistant" className="h-dvh min-w-0 overflow-hidden bg-background">
 
 
@@ -124,11 +132,11 @@ export default function App() {
               <div className="welcome-content mx-auto flex w-full max-w-[710px] flex-col gap-7">
                 <Empty className="flex-none gap-0 border-0 p-0"><EmptyHeader className="welcome-header w-full max-w-md gap-3">
                   <div className="welcome-art mb-1 w-full max-w-[420px]"><Suspense fallback={<Skeleton className="aspect-[16/5] w-full rounded-xl opacity-20" />}><EducationalMotion variant="campus" dark={dark} paused={motionPaused} className="w-full select-none" /></Suspense></div>
-                  <Badge variant="secondary" className="welcome-eyebrow mb-1 border-0 px-2.5 py-1 text-[10px] font-normal tracking-wide shadow-[inset_0_1px_rgba(255,255,255,.7)]">THE UNIVERSITY ASSISTANT</Badge>
+                  <Badge variant="secondary" className="welcome-eyebrow mb-1 border-0 px-2.5 py-1 text-[10px] font-normal tracking-wide shadow-none">THE UNIVERSITY ASSISTANT</Badge>
                   <EmptyTitle role="heading" aria-level={1} className="welcome-title text-3xl leading-tight font-medium tracking-tight sm:text-[38px]">A little clarity for<br />university life.</EmptyTitle>
                   <EmptyDescription className="welcome-description mt-1 max-w-sm text-sm leading-6">Ask about courses, policies, and campus support.{' '}<br className="hidden sm:block" />Your answers will start with university documents.</EmptyDescription>
                 </EmptyHeader></Empty>
-                <div className="grid grid-cols-3 gap-2 sm:gap-2.5">{starterQuestions.map((question) => <Button key={question.title} variant="ghost" onClick={() => fillPrompt(question.question)} className="welcome-topic h-auto min-w-0 flex-col items-start justify-start gap-2 rounded-2xl border-0 bg-muted/35 p-2 text-left shadow-[0_18px_35px_-28px_rgba(15,23,42,.6),inset_0_1px_rgba(255,255,255,.8)] transition-[transform,background-color,box-shadow] hover:-translate-y-0.5 hover:bg-muted/55 hover:shadow-[0_22px_42px_-28px_rgba(15,23,42,.65),inset_0_1px_rgba(255,255,255,.9)] sm:p-3">
+                <div className="grid grid-cols-3 gap-2 sm:gap-2.5">{starterQuestions.map((question) => <Button key={question.title} variant="outline" onClick={() => fillPrompt(question.question)} className="welcome-topic h-auto min-w-0 flex-col items-start justify-start gap-2 rounded-xl p-2 text-left shadow-none hover:shadow-none sm:p-3">
                   <span className="welcome-topic-top flex w-full flex-col items-center gap-1.5 sm:flex-row sm:gap-2.5"><Suspense fallback={<Skeleton className="welcome-topic-art h-10 w-11 shrink-0 rounded-md opacity-20" />}><EducationalMotion variant={question.icon === 'book' ? 'courses' : question.icon === 'file' ? 'policies' : 'support'} dark={dark} paused={motionPaused} className="welcome-topic-art w-9 shrink-0 select-none sm:w-11" /></Suspense><span className="whitespace-normal text-center text-[11px] leading-4 font-medium sm:text-left sm:text-xs">{question.title}</span><ChevronRightIcon className="ml-auto hidden size-3.5 shrink-0 text-muted-foreground sm:block" /></span>
                   <span className="welcome-topic-description hidden px-1 pb-1 whitespace-normal text-[11px] font-normal text-muted-foreground sm:inline">{question.description}</span>
                 </Button>)}</div>
@@ -153,7 +161,7 @@ export default function App() {
           <footer className="z-10 shrink-0 bg-background px-5 pt-2 pb-4 sm:px-10 sm:pb-5">
             <div className="mx-auto max-w-[710px]">
               <form onSubmit={(event) => { event.preventDefault(); void submit() }}>
-                <InputGroup className="prompt-surface rounded-2xl border-0 bg-background shadow-[0_20px_50px_-34px_rgba(15,23,42,.65),0_3px_14px_rgba(15,23,42,.06),inset_0_1px_rgba(255,255,255,.85)] has-[[data-slot=input-group-control]:focus-visible]:border-0 has-[[data-slot=input-group-control]:focus-visible]:ring-0">
+                <InputGroup className="prompt-surface rounded-2xl border-0 bg-background shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-0 has-[[data-slot=input-group-control]:focus-visible]:ring-0">
                   <InputGroupTextarea ref={inputRef} aria-label="Ask the university assistant" aria-describedby="prompt-help" value={draft} onChange={(event) => setDrafts((previous) => ({ ...previous, [activeId]: event.target.value }))} onKeyDown={(event) => { if (event.key === 'Escape' && busy && !event.nativeEvent.isComposing) { event.preventDefault(); session.cancel(activeId); return } if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void submit() } }} placeholder="Ask about your university…" className="min-h-[66px] max-h-40 resize-none px-4 pt-4 pb-2 text-sm" maxLength={8000}  />
                   <InputGroupAddon align="block-end" className="justify-between gap-3 px-4 pb-3">
                     <InputGroupText className="gap-1.5 text-[10px]"><InterfaceIcon icon={BookOpenIcon} size="xs" />University documents</InputGroupText>
@@ -170,7 +178,6 @@ export default function App() {
         </SidebarInset>
 
         <SourceInspector open={sourcesOpen} onOpenChange={setSourcesOpen} sources={inspectorSources} selectedId={selectedSource} />
-      </SidebarProvider>
-    </TooltipProvider>
+    </>
   )
 }
