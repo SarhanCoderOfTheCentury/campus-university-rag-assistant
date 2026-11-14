@@ -46,7 +46,7 @@ Vercel preview URLs change between deployments. If you use browser cookies acros
 
 ## What the interface does
 
-- Creates an assistant turn immediately when Enter submits a question. There is no visible send button. Shift+Enter adds a newline and IME composition does not submit accidentally.
+- Creates an assistant turn when the Send button is clicked or Enter submits a question. Send is disabled for blank prompts and becomes Stop while generating. Shift+Enter adds a newline and IME composition does not submit accidentally.
 - Opens an accessible activity timeline while connecting/processing. Only received backend events create retrieval, document-reading or summary steps. Spinners indicate actual active requests.
 - Updates document discovery, reading and completion with authoritative document IDs, titles, excerpts and optional locations. Expanding a step exposes its detail and evidence.
 - Streams validated answer blocks and attaches their registered, numbered citations. Hover previews evidence; clicking opens the source inspector. The inspector stays synchronized while events arrive.
