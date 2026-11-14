@@ -48,11 +48,13 @@ function CampusAssistant() {
   const inspectedMessage = conversations.flatMap(chat => chat.messages).find((message): message is AssistantMessage => message.role === 'assistant' && message.run.request.request_id === inspectorRequestId)
   const inspectorSources = inspectedMessage ? Object.values(inspectedMessage.run.sources).sort((a, b) => a.citation_number - b.citation_number) : []
 
-  function newChat() {
-    setActiveId(session.newConversation())
+  function selectConversation(conversationId: string) {
+    setActiveId(conversationId)
     setOpen(false)
     setOpenMobile(false)
   }
+
+  function newChat() { selectConversation(session.newConversation()) }
 
   function inspectSource(source: EvidenceSource, requestId: string) {
     setInspectorRequestId(requestId); setSelectedSource(source.source_id); setSourcesOpen(true)
@@ -97,7 +99,7 @@ function CampusAssistant() {
               <SidebarGroupLabel className="mb-2 text-[10px] font-medium tracking-[0.14em] uppercase">Workspace</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  <SidebarMenuItem><SidebarMenuButton aria-label="Conversations" tooltip="Conversations" isActive onClick={() => setActiveId(active.id)}><InterfaceIcon icon={MessageSquareIcon} size="xs" /><span>Conversations</span></SidebarMenuButton></SidebarMenuItem>
+                  <SidebarMenuItem><SidebarMenuButton aria-label="Conversations" tooltip="Conversations" isActive onClick={() => selectConversation(active.id)}><InterfaceIcon icon={MessageSquareIcon} size="xs" /><span>Conversations</span></SidebarMenuButton></SidebarMenuItem>
                   <SidebarMenuItem><SidebarMenuButton aria-label="Source documents" tooltip="Source documents" onClick={openSources}><InterfaceIcon icon={LibraryIcon} size="xs" /><span>Source documents</span></SidebarMenuButton></SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
@@ -105,7 +107,7 @@ function CampusAssistant() {
             <SidebarGroup>
               <SidebarGroupLabel className="mb-2 text-[10px] font-medium tracking-[0.14em] uppercase">Conversations</SidebarGroupLabel>
               <SidebarGroupContent><SidebarMenu>
-                {conversations.map((chat) => <SidebarMenuItem key={chat.id}><SidebarMenuButton aria-label={chat.title} tooltip={chat.title} onClick={() => setActiveId(chat.id)} isActive={chat.id === activeId} className="h-auto min-h-9 items-start py-2 text-xs"><InterfaceIcon icon={MessageSquareIcon} size="xs" className="mt-0.5" /><span className="line-clamp-2 whitespace-normal leading-5 group-data-[collapsible=icon]:hidden">{chat.title}</span></SidebarMenuButton></SidebarMenuItem>)}
+                {conversations.map((chat) => <SidebarMenuItem key={chat.id}><SidebarMenuButton aria-label={chat.title} tooltip={chat.title} onClick={() => selectConversation(chat.id)} isActive={chat.id === activeId} className="h-auto min-h-9 items-start py-2 text-xs"><InterfaceIcon icon={MessageSquareIcon} size="xs" className="mt-0.5" /><span className="line-clamp-2 whitespace-normal leading-5 group-data-[collapsible=icon]:hidden">{chat.title}</span></SidebarMenuButton></SidebarMenuItem>)}
               </SidebarMenu></SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
