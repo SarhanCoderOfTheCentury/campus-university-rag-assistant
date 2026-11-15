@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-11-15T06:46:59.632772+00:00",
+  "current_backend_release": "4ad414c8edee",
+  "recording_note": "SSE cases were recorded during rollout; the final browser verification used the current backend release.",
+  "frontend": "https://campus-university-rag-assistant-dqa.vercel.app/",
+  "automated_live_cases": [
+    {
+      "question": "How much is the application processing fee? Explain any conflicting figures in the documents.",
+      "endpoint": "https://vrn7rkajt4fke7okwkdrjj5jpq0zhfws.lambda-url.us-east-1.on.aws/api/chat/stream",
+      "terminal": "completed",
+      "outcome": "answered",
+      "event_count": 29,
+      "first_answer_seconds": 30.221,
+      "total_seconds": 34.458,
+      "answer": "The documents provide differing figures for the application processing fee depending on the source and context:\n\n* **General FAQ:** States that candidates pay a basic application processing fee of Rs. 1,000/- with their Admission Forms.\n* **Spring 2027 Admission Notice:** States that the on-campus application processing fee is Rs. 1,500/-, and the online-only undergraduate application processing fee is Rs. 2,500/-.\n\n### Understanding the Discrepancy\n\nThese figures represent conflicting or differently scoped source claims rather than independently established effective-date revisions. Because fees, schedules, and admission dates are subject to change and these are uploaded snapshots with unknown capture dates, please verify the current fee directly with the admissions office before applying. For Spring 2027 applications, prefer the explicitly session-scoped notice.",
+      "source_ids": [
+        "dsu-b127a9130bc5a000",
+        "dsu-558943d8efadd920",
+        "curated-238ca197c44d843b"
+      ]
+    },
+    {
+      "question": "What time does the admissions office open?",
+      "endpoint": "https://vrn7rkajt4fke7okwkdrjj5jpq0zhfws.lambda-url.us-east-1.on.aws/api/chat/stream",
+      "terminal": "completed",
+      "outcome": "answered",
+      "event_count": 13,
+      "first_answer_seconds": 11.426,
+      "total_seconds": 11.447,
+      "answer": "The provided university documents do not establish what time the admissions office opens . Please note that these are uploaded snapshots with unknown capture dates, not live university records.",
+      "source_ids": [
+        "curated-3a6292b21440d7c7"
+      ]
+    }
+  ],
+  "browser_check": {
+    "question": "What degree programmes does DSU offer?",
+    "result": "Response completed",
+    "programmes_displayed": 15,
+    "citation_buttons": 16,
+    "inspected_original_document": "https://www.dsu.edu.pk/cs-bachelor-program/",
+    "screenshot": "screenshots/live-rag.jpg"
+  },
+  "connection_checks": {
+    "production_origin_preflight": 200,
+    "unapproved_origin_preflight": 400,
+    "cancel_endpoint_status": 202,
+    "cancel_test": "Stream ended without answer_delta or completed after explicit cancellation"
+  },
+  "offline_checks": {
+    "backend_tests": 19,
+    "frontend_tests": 55,
+    "production_build": "passed"
+  },
+  "limits": "Recorded checks demonstrate these cases, not universal answer accuracy or future provider availability."
+}

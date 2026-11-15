@@ -1,5 +1,7 @@
 # Campus RAG deployment
 
+Recorded checks: [live-validation.json](live-validation.json) and [the completed Vercel answer screenshot](screenshots/live-rag.jpg). These include real AWS fee/missing-information responses, the Vercel programme-list answer, citation inspection, CORS and cancellation checks. Earlier provider/validation failures were corrected during development; rate limits and provider outages remain possible and are handled without invented answers.
+
 ## Services
 
 - Frontend: https://campus-university-rag-assistant-dqa.vercel.app/
@@ -53,6 +55,8 @@ AWS_DEFAULT_REGION=us-east-1 python backend/deploy/deploy.py \
 ```
 
 The package uses Linux/Python-3.12 wheels and Lambda Adapter layer version 30. It uploads through S3 because dependencies exceed the direct ZIP upload limit. `.deploy/` is ignored by Git and Vercel. The committed `backend/data/` bundle is already built; ingestion is not needed for a code-only deployment. Python runs on AWS, never on Vercel.
+
+After initial provisioning, `python -m backend.deploy.update_code --zip .deploy/lambda.zip` updates code and its release hash without recreating IAM, S3 or DynamoDB resources. Package the current source first. This helper uses the same AWS CLI credentials and existing resources.
 
 For local API work, use AWS credentials that can read this secret/table or configure a separate development account. Set `RAG_ALLOWED_ORIGINS=http://localhost:5173` and launch `uvicorn backend.aws_app:app`. Local calls share configured quota counters, so use separate development resources for sustained testing.
 
