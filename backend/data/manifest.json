@@ -1,0 +1,9 @@
+{
+  "dataset_sha256": "26fca353db81c07fde8f502a67fb5aad1cd07538adccd2c2637d8ad51f2515fd",
+  "chunks_sha256": "a8f930106b8270f21bb5a4289ec0a1dde74c5034b0d25639e2db97fce7de766c",
+  "vectors_sha256": "34acf3ca3e6464b8d0c0e4a8df857cf3751f06f4029dc70c057cc0a6f87d70df",
+  "embedding_model": "gemini-embedding-001",
+  "dimensions": 768,
+  "chunks": 465,
+  "capture_dates_known": false
+}

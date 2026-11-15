@@ -3,6 +3,7 @@ import { parseEvent, protocolError, RagError, type ChatRequest, type RagEvent, t
 
 export type StreamOptions = {
   endpoint?: string
+  cancelEndpoint?: string
   idleTimeoutMs?: number
   fetcher?: typeof fetch
   /** Obtain short-lived auth from your real login session. Never put provider secrets in VITE_* variables. */
@@ -21,6 +22,20 @@ export function createRagTransport(options: StreamOptions): RagTransport {
       if (!endpoint) throw new RagError('not_configured', 'The university knowledge base is not connected yet. Your question was not sent.')
       if (!Number.isFinite(idleTimeout) || idleTimeout < 1000) throw new RagError('configuration_error', 'The stream timeout is not configured correctly.')
       const controller = new AbortController()
+      let terminal = false
+      let authHeaders: Record<string, string> | undefined
+      let cancellationSent = false
+      const cancelRemote = () => {
+        if (!options.cancelEndpoint || terminal || cancellationSent) return
+        cancellationSent = true
+        // Lambda response streaming may continue after HTTP disconnect. Cancel explicitly.
+        void fetcher(options.cancelEndpoint, {
+          method: 'POST', keepalive: true, credentials: options.credentials ?? 'include',
+          headers: { ...authHeaders, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ conversation_id: request.conversation_id, request_id: request.request_id, message_id: request.message_id }),
+        }).catch(() => { /* Local abort still completes; server timeout bounds failed cancellation delivery. */ })
+      }
+      controller.signal.addEventListener('abort', cancelRemote, { once: true })
       const relayAbort = () => controller.abort(signal.reason)
       signal.addEventListener('abort', relayAbort, { once: true })
       if (signal.aborted) relayAbort()
@@ -30,18 +45,17 @@ export function createRagTransport(options: StreamOptions): RagTransport {
         timer = setTimeout(() => controller.abort(new RagError('timeout', 'The agent stopped sending activity. Partial results are preserved.')), idleTimeout)
       }
       let reader: ReadableStreamDefaultReader<Uint8Array> | undefined
-      let terminal = false
       let bytes = 0
       try {
         touch()
-        const authHeaders = await options.headers?.(controller.signal)
+        authHeaders = await options.headers?.(controller.signal)
         const response = await fetcher(endpoint, {
           method: 'POST', credentials: options.credentials ?? 'include', signal: controller.signal,
           headers: { ...authHeaders, Accept: 'text/event-stream', 'Content-Type': 'application/json' },
           body: JSON.stringify(request),
         })
         if (!response.ok) {
-          const message = response.status === 401 || response.status === 403 ? 'You are not authorized to use this knowledge base.' : response.status === 503 ? 'The university knowledge base is not available yet. No retrieval activity was received.' : `The agent could not accept the request (HTTP ${response.status}).`
+          const message = response.status === 401 || response.status === 403 ? 'You are not authorized to use this knowledge base.' : response.status === 429 ? 'The assistant has reached its request limit. Please try again later.' : response.status === 503 ? 'The university knowledge base is not available yet. No retrieval activity was received.' : `The agent could not accept the request (HTTP ${response.status}).`
           throw new RagError(`http_${response.status}`, message)
         }
         if (!response.headers.get('content-type')?.toLowerCase().startsWith('text/event-stream')) protocolError('The agent returned an unexpected response format.')
@@ -78,6 +92,8 @@ export function createRagTransport(options: StreamOptions): RagTransport {
       } finally {
         clearTimeout(timer)
         signal.removeEventListener('abort', relayAbort)
+        if (!terminal) cancelRemote()
+        controller.signal.removeEventListener('abort', cancelRemote)
         controller.abort()
         if (reader) { try { await reader.cancel() } catch { /* Already closed or aborted. */ } reader.releaseLock() }
       }

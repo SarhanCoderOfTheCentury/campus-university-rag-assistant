@@ -79,4 +79,18 @@ describe('POST SSE integration',()=>{
       expect(vi.getTimerCount()).toBe(0)
     } finally { vi.useRealTimers() }
   })
+  it('posts a separate cancellation request when a Lambda stream is stopped',async()=>{
+    const external=new AbortController()
+    const fetcher=vi.fn(async(url:unknown,options:RequestInit|undefined)=>{
+      if(String(url).endsWith('/cancel'))return new Response('{}',{status:202})
+      return new Response(new ReadableStream({start(c){options?.signal?.addEventListener('abort',()=>c.error(options.signal?.reason),{once:true})}}),{headers:{'content-type':'text/event-stream'}})
+    }) as unknown as typeof fetch
+    const pending=createRagTransport({endpoint:'/stream',cancelEndpoint:'/cancel',credentials:'omit',fetcher}).stream(request,external.signal,()=>{}).catch(e=>e)
+    await Promise.resolve();external.abort()
+    expect((await pending).code).toBe('cancelled')
+    const calls=vi.mocked(fetcher).mock.calls.filter(([url])=>url==='/cancel')
+    expect(calls).toHaveLength(1)
+    expect(calls[0][1]?.keepalive).toBe(true)
+    expect(JSON.parse(calls[0][1]?.body as string).request_id).toBe(request.request_id)
+  })
 })

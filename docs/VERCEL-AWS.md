@@ -1,5 +1,7 @@
 # Deploy the frontend on Vercel and connect AWS later
 
+> The AWS connection is now implemented. See [AWS-DEPLOYMENT.md](AWS-DEPLOYMENT.md) for the active endpoint and operating instructions. The staged setup guidance below describes a disconnected/custom deployment. On the current branch, an unset `VITE_RAG_STREAM_URL` uses `src/config/deployment.json`; set an explicitly blank override to disconnect.
+
 ## Current boundary
 
 Vercel serves the built React application and its assets. The browser will POST directly to the future AWS HTTPS API and read its Server-Sent Events stream. AWS owns authentication, LangChain execution, document ingestion, embeddings, retrieval, source metadata and provider credentials. No AWS resources or real RAG service are deployed by this preparation.

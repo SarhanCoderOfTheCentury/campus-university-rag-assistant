@@ -84,9 +84,9 @@ def create_app(*, service_factory: Callable | None = None, authorize: Callable |
         except GroundingError:
             logger.warning('RAG grounding validation failed for run %s', run_id)
             yield encode({'type': 'error', 'code': 'grounding_failed', 'message': 'The agent could not verify this response against its retrieved documents. Partial verified passages are preserved.'})
-        except Exception:
+        except Exception as exc:
             # Do not send provider errors, stack traces, tokens, or raw internal reasoning to the browser.
-            logger.error('RAG processing failed for run %s', run_id)
+            logger.error('RAG processing failed for run %s: %s (status %s)', run_id, type(exc).__name__, getattr(exc,'code',None))
             yield encode({'type': 'error', 'code': 'processing_failed', 'message': 'The university assistant could not complete this request. Partial results are preserved.'})
     return app
 

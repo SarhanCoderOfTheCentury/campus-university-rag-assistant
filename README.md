@@ -1,10 +1,14 @@
 # Campus University RAG Assistant
 
-## React frontend on Vercel, future RAG backend on AWS
+## React frontend on Vercel, LangChain RAG backend on AWS
 
-The root React/Vite project is ready for a **frontend-only Vercel deployment**. Start with [the deployment guide](docs/VERCEL-AWS.md). Use Node.js 22, root directory `./`, install `npm ci`, build `npm run build`, output `dist`. Leave `VITE_RAG_STREAM_URL` unset until the AWS API is ready. Later, set it to the full HTTPS streaming endpoint and redeploy. Model credentials, document storage and retrieval run on AWS.
+The root React/Vite application connects to the Python LangChain service on AWS Lambda through a real HTTPS SSE stream. See [the deployed AWS service and operating guide](docs/AWS-DEPLOYMENT.md). The agent searches 465 supplied DSU passages using Gemini embeddings, BM25, reciprocal-rank fusion and reranking, then checks formatted answer sections against retrieved evidence before displaying them with citations.
 
-The previous Vercel Python entrypoint has been removed; the FastAPI example stays in `backend/`. The separate Streamlit application below is preserved and is not part of the Vercel deployment.
+Frontend: https://campus-university-rag-assistant-dqa.vercel.app/
+
+Use Node.js 22, root directory `./`, install `npm ci`, build `npm run build`, output `dist`. The public AWS endpoint is in `src/config/deployment.json`; an optional `VITE_RAG_STREAM_URL` overrides it. Model credentials and all retrieval execution stay on AWS. This is a public-document assistant with shared usage limits, not an authenticated student-record system.
+
+The production API entrypoint is `backend.aws_app:app`, and the curated system prompt is `backend/system_prompt.txt`. Existing FastAPI protocol examples are preserved. The separate Streamlit application below is not part of the Vercel deployment.
 
 The working **Streamlit + LangChain + Gemini + local FAISS agent** is in [`streamlit-agent/`](streamlit-agent/README.md). It uses the supplied **584 DSU embeddings** and includes an isolated fictional dataset for the assignment's dated-policy and security tests.
 

@@ -1,0 +1,6 @@
+-r requirements.txt
+langchain-google-genai==4.5.0
+google-genai==3.3.0
+numpy==2.2.6
+rank-bm25==0.2.2
+boto3==1.43.32

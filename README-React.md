@@ -2,7 +2,7 @@
 
 A responsive React/TypeScript chat interface with real event-driven document activity, streamed answers, numbered evidence citations, and a FastAPI/LangChain integration example.
 
-The real university retriever, model, document index and login service are **not connected**. The published frontend deliberately reports this and never substitutes sample policies, simulated progress or canned answers. Test fixtures are isolated under `tests/` and `backend/tests/` and are not imported by the application.
+The production frontend connects to the AWS-hosted LangChain/Gemini agent and the supplied DSU document index. [AWS deployment and connection details](docs/AWS-DEPLOYMENT.md) describe the live endpoint, source limits, cancellation and request budgets. This is a public-document assistant; student login/private-record access is not implemented. Test fixtures remain isolated from the deployed application.
 
 ## Run the frontend
 
@@ -37,10 +37,10 @@ The frontend sets `credentials: omit` by default for the future cross-origin AWS
 Vercel serves the static React frontend. The planned FastAPI/LangChain pipeline will run separately on AWS. There are no Vercel Python functions or RAG proxy functions in this configuration. See [Vercel + AWS setup](docs/VERCEL-AWS.md) for exact settings, authentication, CORS and streaming checks.
 
 1. Import this repository in Vercel with root directory `./`, framework Vite and Node 22.x. The committed configuration sets install `npm ci`, build `npm run build` and output `dist`.
-2. Leave `VITE_RAG_STREAM_URL` unset for the current UI phase. The frontend reports the disconnected backend and does not send requests to a guessed service.
-3. Once the AWS backend exists, set `VITE_RAG_STREAM_URL` to its full HTTPS `/api/chat/stream` URL and redeploy. Production builds reject localhost, HTTP and relative API paths.
+2. Leave `VITE_RAG_STREAM_URL` unset to use the committed public AWS endpoint in `src/config/deployment.json`. Set it to an explicitly blank value to disconnect the frontend.
+3. To override the service, set `VITE_RAG_STREAM_URL` to its full HTTPS `/api/chat/stream` URL and redeploy. Production builds reject localhost, HTTP and relative API paths.
 4. Keep `VITE_RAG_CREDENTIALS=omit` for bearer authentication, or explicitly configure `include` for cookies.
-5. Configure `RAG_FACTORY`, `RAG_AUTH_FACTORY`, exact `RAG_ALLOWED_ORIGINS`, provider keys and storage credentials on AWS only.
+5. The production AWS entrypoint uses the real public-document agent, Secrets Manager and DynamoDB request limits. For a private authenticated service, implement identity verification/document ACLs before adding private records. The generic factory example remains available separately.
 
 Vercel preview URLs must be explicitly allowed by the AWS API before they can access it. The browser streams directly from AWS, so RAG generation does not pass through a Vercel function. AWS application/load-balancer timeouts and the frontend idle timeout still apply. Changing Vite environment values requires a rebuild/redeployment.
 
