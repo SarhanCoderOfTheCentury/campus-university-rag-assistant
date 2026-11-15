@@ -10,6 +10,21 @@
     "forgotten_value_not_recalled": "passed"
   },
   "completed_turns": 6,
+  "backend_release": "b5335170e485",
+  "frontend_url": "https://campus-university-rag-assistant-dqa.vercel.app/",
+  "deployed_browser_checks": {
+    "actual_streamed_memory_acknowledgement": "passed",
+    "transcript_restored_after_refresh": "passed",
+    "preference_recalled_after_refresh": "passed",
+    "new_conversation_does_not_inherit_preference": "passed",
+    "sidebar_closes_on_new_conversation": "passed",
+    "official_flaticon_font_loaded": "passed",
+    "empty_state_matches_viewport_without_scroll": "passed",
+    "source_inspector_opens_and_closes": "passed"
+  },
+  "frontend_tests_passed": 59,
+  "backend_tests_passed": 25,
+  "node_22_build": "passed",
   "transcripts_included": false,
   "passed": true
 }

@@ -25,3 +25,5 @@ If storage is denied or full, the open tab continues in memory but refresh resto
 ## Checks
 
 Offline tests cover note corrections, forgetting, credential-pattern redaction, whole-pair context limits, expiry before TTL deletion, conditional stale-write rejection, malformed browser snapshots, storage denial, restoration and conversation-token separation. Real DynamoDB checks exercise recall, correction, superseded-write rejection and token isolation. Live checks and the deployed UI additionally verify multi-turn recall and refresh behavior.
+
+See the [transcript-free validation results](session-memory-validation.json) and [updated interface screenshot](screenshots/flaticon-icons.jpg). The browser checks used a synthetic test preference; no conversation transcript or capability token is published in these results.
