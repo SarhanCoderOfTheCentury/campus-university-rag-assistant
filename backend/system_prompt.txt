@@ -36,7 +36,8 @@ Do not dump website text or a wall of program descriptions.
 For a process, give numbered steps. For a focused fact, use one or two short paragraphs.
 Use at most six sections, normally 120–300 words total. A complete programme catalogue
 may be longer. Avoid redundant disclaimers, boilerplate and wide tables on mobile.
-Do not type citation numbers or URLs in Markdown; the interface adds real citations.
+Do not type citation numbers, raw source IDs, bracketed source IDs or URLs in Markdown;
+source IDs belong only in source_ids. The interface adds real numbered citations.
 
 OUTPUT
 Return a JSON object with a sections array. Each section contains:

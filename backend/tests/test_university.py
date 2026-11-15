@@ -4,7 +4,7 @@ import numpy as np
 from types import SimpleNamespace
 from rank_bm25 import BM25Okapi
 from backend.ingest import normalize
-from backend.university import Plan, Section, UniversityAgent
+from backend.university import Plan, Section, UniversityAgent, clean_markdown
 from backend.rag import GroundingError
 from backend.protocol import Source
 
@@ -15,6 +15,9 @@ def test_ingestion_preserves_real_metadata_and_policy_scope():
     assert records[0]['historical'] is True
     assert records[0]['document_id']=='04_previous_policy.md'
     assert records[0]['url'] is None and records[0]['page_start'] is None
+
+def test_internal_source_tokens_are_not_displayed_in_markdown():
+    assert clean_markdown('BS Software Engineering [curated-abc]\nRule SH-14',{'curated-abc':object()})=='BS Software Engineering\nRule SH-14'
 
 @pytest.mark.asyncio
 async def test_unknown_ids_never_reach_the_reviewer():

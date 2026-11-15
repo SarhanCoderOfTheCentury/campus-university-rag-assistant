@@ -19,7 +19,7 @@ The Colab's workflow is adapted in `backend/university.py`: query rewriting with
 
 `backend/system_prompt.txt` instructs the model to answer directly with short paragraphs, headings, bullets and numbered steps. It prohibits invented facts, unsupported currentness, instructions embedded in documents and private model reasoning. It explains the unresolved application-fee conflict and absence of authenticated older policy versions. Source capture dates are unknown; the system does not claim live university verification.
 
-Gemini 3.5 Flash-Lite is primary. Gemini 2.5 Flash is a same-provider fallback when a model call fails before producing usable output. This addresses transient provider failures observed during live testing; no response is replaced after its text has been emitted. Both routes undergo the same grounding checks.
+Gemini 3.5 Flash-Lite is primary. Gemini 3.1 Flash-Lite is a same-provider fallback verified callable with the configured key when a model call fails before producing usable output. This addresses transient provider failures observed during live testing; no response is replaced after its text has been emitted. Both routes undergo the same grounding checks.
 
 ## Grounding and streaming
 

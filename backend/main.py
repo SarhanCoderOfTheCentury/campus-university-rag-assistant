@@ -87,7 +87,8 @@ def create_app(*, service_factory: Callable | None = None, authorize: Callable |
         except Exception as exc:
             # Do not send provider errors, stack traces, tokens, or raw internal reasoning to the browser.
             logger.error('RAG processing failed for run %s: %s (status %s)', run_id, type(exc).__name__, getattr(exc,'code',None))
-            yield encode({'type': 'error', 'code': 'processing_failed', 'message': 'The university assistant could not complete this request. Partial results are preserved.'})
+            limited='RateLimit' in type(exc).__name__ or getattr(exc,'code',None)==429
+            yield encode({'type': 'error', 'code': 'provider_rate_limit' if limited else 'processing_failed', 'message': 'The AI provider is temporarily rate-limited. Please try again shortly. Partial results are preserved.' if limited else 'The university assistant could not complete this request. Partial results are preserved.'})
     return app
 
 app = create_app()
