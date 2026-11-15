@@ -26,6 +26,16 @@ describe('POST SSE integration',()=>{
     await expect(transport.stream(request,new AbortController().signal,()=>{})).rejects.toMatchObject({code:'not_configured'})
     expect(fetcher).not.toHaveBeenCalled()
   })
+  it('streams directly from the configured AWS origin with explicit credentials and user auth',async()=>{
+    const fetcher=fetchReturning(response(encode(happyEvents())))
+    const received:RagEvent[]=[]
+    await createRagTransport({endpoint:'https://rag.example.invalid/api/chat/stream',credentials:'omit',headers:async()=>({Authorization:'Bearer test-session-only'}),fetcher}).stream(request,new AbortController().signal,e=>received.push(e))
+    const [url,options]=vi.mocked(fetcher).mock.calls[0]
+    expect(url).toBe('https://rag.example.invalid/api/chat/stream')
+    expect(options?.credentials).toBe('omit')
+    expect(options?.headers).toMatchObject({Authorization:'Bearer test-session-only',Accept:'text/event-stream'})
+    expect(received.at(-1)?.type).toBe('completed')
+  })
   it('fails on EOF without completed and retains delivered deltas for the store',async()=>{
     const received:RagEvent[]=[]
     await expect(createRagTransport({endpoint:'/stream',fetcher:fetchReturning(response(encode(happyEvents().slice(0,8))))}).stream(request,new AbortController().signal,e=>received.push(e))).rejects.toMatchObject({code:'interrupted'})

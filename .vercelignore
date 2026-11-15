@@ -1,0 +1,17 @@
+# Deploy only the frontend source/build inputs.
+backend/
+streamlit-agent/
+deliverables/
+docs/
+tests/
+.github/
+.openai/
+.venv/
+**/__pycache__/
+**/.pytest_cache/
+*.zip
+*.pdf
+*.mp4
+.env
+.env.local
+.env.*.local

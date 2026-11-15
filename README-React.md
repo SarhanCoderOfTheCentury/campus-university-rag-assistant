@@ -6,7 +6,7 @@ The real university retriever, model, document index and login service are **not
 
 ## Run the frontend
 
-Use Node.js 22.12+ or a supported newer release.
+Use Node.js 22 (see `.nvmrc` and `package.json`).
 
 ```bash
 npm ci
@@ -30,19 +30,19 @@ RAG_DEV_API_ORIGIN=http://localhost:8000
 
 Restart Vite after changing environment variables. `RAG_DEV_API_ORIGIN` applies only to the local development server. In production, use an HTTPS API URL or configure your own same-origin reverse proxy. Set `VITE_RAG_STREAM_URL` **before building**, then rebuild and redeploy the frontend. Provider keys belong exclusively on the Python server; all `VITE_*` values are public.
 
-The fetch transport sends cookies by default. For an existing bearer-token login, provide the transport's async `headers(signal)` callback in `src/hooks/use-rag-chat.ts`, obtaining a short-lived token from your real authentication session. No login screen or credentials are invented in this project.
+The frontend sets `credentials: omit` by default for the future cross-origin AWS API. Set `VITE_RAG_CREDENTIALS=include` only for a real cookie authentication setup. For bearer-token login, provide the transport's async `headers(signal)` callback in `src/hooks/use-rag-chat.ts`, obtaining a short-lived token from your real authentication session. No login screen or credentials are invented in this project.
 
 ## Deploy on Vercel
 
-The repository is configured as a Vite project and includes `api/index.py` as a Vercel Python Function. Importing that function exposes the same FastAPI application from `backend/main.py`. The root `requirements.txt` installs the pinned backend dependencies, while `vercel.json` selects the `dist/` frontend output and allows up to 60 seconds for a streamed request.
+Vercel serves the static React frontend. The planned FastAPI/LangChain pipeline will run separately on AWS. There are no Vercel Python functions or RAG proxy functions in this configuration. See [Vercel + AWS setup](docs/VERCEL-AWS.md) for exact settings, authentication, CORS and streaming checks.
 
-1. Import this repository in Vercel and keep the project root at the repository root. Vercel will use `npm run build` and publish `dist/`.
-2. Add `VITE_RAG_STREAM_URL=/api/chat/stream` as a Vercel environment variable. Because Vite embeds this value at build time, redeploy after adding or changing it.
-3. Add `RAG_FACTORY`, `RAG_AUTH_FACTORY`, and `RAG_ALLOWED_ORIGINS` as server environment variables. Point the first two to real importable modules committed with your integration. Set `RAG_ALLOWED_ORIGINS` to your exact Vercel production and preview origins; do not use `*`.
-4. Add model, vector database, and authentication secrets as server-only variables. Never prefix those secrets with `VITE_`.
-5. Deploy. Until the real factory and authorization hooks are present, `/api/chat/stream` intentionally returns HTTP 503 and emits no fabricated activity.
+1. Import this repository in Vercel with root directory `./`, framework Vite and Node 22.x. The committed configuration sets install `npm ci`, build `npm run build` and output `dist`.
+2. Leave `VITE_RAG_STREAM_URL` unset for the current UI phase. The frontend reports the disconnected backend and does not send requests to a guessed service.
+3. Once the AWS backend exists, set `VITE_RAG_STREAM_URL` to its full HTTPS `/api/chat/stream` URL and redeploy. Production builds reject localhost, HTTP and relative API paths.
+4. Keep `VITE_RAG_CREDENTIALS=omit` for bearer authentication, or explicitly configure `include` for cookies.
+5. Configure `RAG_FACTORY`, `RAG_AUTH_FACTORY`, exact `RAG_ALLOWED_ORIGINS`, provider keys and storage credentials on AWS only.
 
-Vercel preview URLs change between deployments. If you use browser cookies across origins, configure the real authentication service for those exact preview origins or use a short-lived bearer token through the frontend transport's `headers` callback. Long RAG runs must finish within the function duration allowed by your Vercel plan; adjust `maxDuration` only when the plan supports it.
+Vercel preview URLs must be explicitly allowed by the AWS API before they can access it. The browser streams directly from AWS, so RAG generation does not pass through a Vercel function. AWS application/load-balancer timeouts and the frontend idle timeout still apply. Changing Vite environment values requires a rebuild/redeployment.
 
 ## What the interface does
 

@@ -1,5 +1,11 @@
 # Campus University RAG Assistant
 
+## React frontend on Vercel, future RAG backend on AWS
+
+The root React/Vite project is ready for a **frontend-only Vercel deployment**. Start with [the deployment guide](docs/VERCEL-AWS.md). Use Node.js 22, root directory `./`, install `npm ci`, build `npm run build`, output `dist`. Leave `VITE_RAG_STREAM_URL` unset until the AWS API is ready. Later, set it to the full HTTPS streaming endpoint and redeploy. Model credentials, document storage and retrieval run on AWS.
+
+The previous Vercel Python entrypoint has been removed; the FastAPI example stays in `backend/`. The separate Streamlit application below is preserved and is not part of the Vercel deployment.
+
 The working **Streamlit + LangChain + Gemini + local FAISS agent** is in [`streamlit-agent/`](streamlit-agent/README.md). It uses the supplied **584 DSU embeddings** and includes an isolated fictional dataset for the assignment's dated-policy and security tests.
 
 The existing React interface and FastAPI integration example are preserved. They remain a separate application; the Streamlit agent is the complete application delivered by this update.

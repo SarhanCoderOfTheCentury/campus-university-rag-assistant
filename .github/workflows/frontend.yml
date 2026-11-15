@@ -1,0 +1,22 @@
+name: Frontend checks
+on:
+  push:
+    paths: ['src/**', 'tests/**', 'public/**', 'package*.json', '*config*', 'vercel.json', 'index.html', '.env.example', '.nvmrc', '.vercelignore', '.github/workflows/frontend.yml']
+  pull_request:
+    paths: ['src/**', 'tests/**', 'public/**', 'package*.json', '*config*', 'vercel.json', 'index.html', '.env.example', '.nvmrc', '.vercelignore', '.github/workflows/frontend.yml']
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run build
+        env:
+          VITE_RAG_STREAM_URL: https://rag-api.example.invalid/api/chat/stream
+          VITE_RAG_CREDENTIALS: omit
