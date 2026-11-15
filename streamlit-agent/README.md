@@ -21,7 +21,7 @@ Copy `.env.example` to `.env` and put your own key in `GEMINI_API_KEY`. Then run
 streamlit run streamlit_app.py
 ```
 
-Open the URL printed by Streamlit. The default dataset is DSU. Select **Noor Skills · fictional assignment** in the sidebar to run the rubric examples. The first demo launch generates its embeddings; the supplied DSU corpus needs no document re-embedding.
+Open the URL printed by Streamlit. The default dataset is DSU. Select **Noor Skills · example** in the collapsed sidebar to run the rubric examples. The first demo launch generates its embeddings; the supplied DSU corpus needs no document re-embedding.
 
 ## What is implemented
 
@@ -179,7 +179,7 @@ Restart Streamlit after replacing supplied DSU data. The original 584-row integr
 - `rag/embeddings.py`: matching query/document embeddings and normalization.
 - `rag/retrieval.py`: version routing, semantic/BM25 retrieval, RRF and context selection.
 - `rag/agent.py`: bounded LangGraph steps, Gemini generation and citation checks.
-- `streamlit_app.py`: UI, session state, executed-step progress and source inspection.
+- `streamlit_app.py`: single chat view, progressive rendering of validated answers, session state, and collapsible supporting sources. The response appears progressively after its citations are checked; provider generation itself is not token streamed so unsupported claims are never shown provisionally.
 - `scripts/evaluate.py`: actual responses, oracle checks and reproducible comparisons.
 
 The implementation adapts the supplied Module09 notebook's hybrid retrieval, RRF, query rewrite, re-ranking and context-budget ideas into connected application modules. It uses real Gemini embeddings and FAISS rather than presenting the notebook's classroom approximations as production semantic search.
