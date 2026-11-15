@@ -37,14 +37,12 @@ export const eventSchema = z.discriminatedUnion('type', [
 ])
 export type RagEvent = z.infer<typeof eventSchema>
 export type EventType = RagEvent['type']
-export type ChatRequest = {
-  protocol_version: 1
-  conversation_id: string
-  request_id: string
-  message_id: string
-  question: string
-  history: { role: 'user' | 'assistant'; content: string }[]
-}
+export const chatRequestSchema = z.object({
+  protocol_version:z.literal(1),conversation_id:id,request_id:id,message_id:id,
+  question:z.string().min(1).max(8000),history:z.array(z.object({role:z.enum(['user','assistant']),content:z.string().max(100000)})).max(40),
+  session_token:z.string().uuid().optional(),client_turn:z.number().int().positive().max(Number.MAX_SAFE_INTEGER).optional(),
+}).refine(r=>(r.session_token===undefined)===(r.client_turn===undefined),'Incomplete session memory identity')
+export type ChatRequest = z.infer<typeof chatRequestSchema>
 export interface RagTransport {
   readonly configured: boolean
   stream(request: ChatRequest, signal: AbortSignal, onEvent: (event: RagEvent) => void): Promise<void>

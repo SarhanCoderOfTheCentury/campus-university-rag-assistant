@@ -20,6 +20,10 @@ Request fields:
 | message_id | string | Identity of the new assistant turn |
 | question | string, 1–8000 characters | The question, included once |
 | history | array of role/content | Previous completed turns only, at most 40 messages |
+| session_token | optional private string | Random per-conversation capability; UUID in the frontend; never echoed or passed to the model |
+| client_turn | optional positive safe integer | Monotonically increasing turn ownership number; supplied together with session_token |
+
+The deployed AWS agent uses the paired optional fields for [server-side session memory](SESSION-MEMORY.md). Legacy clients may omit both and use bounded completed history. Backend memory is authoritative when a capability is supplied; client history cannot resurrect explicitly forgotten preferences. `memory_conflict` and `memory_unavailable` are terminal `error` codes. A response is marked completed only after its conditional memory commit succeeds. Neither field changes the version-1 SSE envelope.
 
 All identifiers are opaque, nonempty strings, at most 200 characters, without control characters.
 The frontend sends UUIDs for new requests and messages. The backend must echo those identities unchanged.

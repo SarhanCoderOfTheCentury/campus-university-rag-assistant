@@ -33,6 +33,8 @@ Lambda may continue processing after a client disconnect. Stop/abort therefore s
 
 ## Public access and limits
 
+Active conversations use [bounded session memory](SESSION-MEMORY.md) in the existing DynamoDB table. Each browser conversation generates its own private token; the server hashes the token with the conversation ID. Conditional writes prevent cancelled or superseded requests from replacing newer context. Typed user preferences and four recent completed exchanges expire after 24 idle hours; university facts still require fresh source retrieval. No new AWS service or broader IAM grant is required. Browser session storage restores transcripts and citations after refresh. This does not add account login or permanent cross-device profiles.
+
 This deployment answers from public university documents. It intentionally does not implement student login or access to private records. The API permits the exact requested Vercel production origin; other browser origins are rejected. CORS is not authentication and non-browser callers can spoof an Origin header. Do not add private documents without real identity verification and document ACLs.
 
 DynamoDB enforces shared limits: 100 chat attempts globally per UTC day, 20 per client IP/day, 6 per client IP/minute, and 500 cancellation requests globally/day. Attempts that are later rejected can still consume an earlier global counter. TTL expires quota/cancellation records. Input bodies are capped at 128 KiB and provider output is bounded. Limits are a small-public-service usage safeguard, not protection against every denial-of-service or invocation charge. The AWS account currently has a small concurrency quota; the script attempts to reserve two executions and reports whether AWS accepts that reservation.

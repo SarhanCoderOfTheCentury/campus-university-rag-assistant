@@ -8,6 +8,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { MessageFooter, MessageHeader } from '@/components/ui/message'
 import { Spinner } from '@/components/ui/spinner'
 import { InterfaceIcon } from '@/components/education/InterfaceIcon'
+import { FlaticonIcon } from '@/components/education/FlaticonIcon'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { Trace, TraceCollapsible, TraceCollapsibleContent, TraceCollapsibleTrigger, TraceDescription, TraceIcon, TraceLine, TraceTitle } from '@/components/ui/trace'
 import { safeSourceUrl, type EvidenceSource } from '@/lib/rag/protocol'
@@ -95,7 +96,7 @@ export function AssistantTurn({ run, onOpenChange, onInspect }: Props) {
     {run.error && run.activities.length > 0 && <p role="alert" className="text-xs leading-6 text-destructive">{run.error.message}</p>}
     {failed && run.blocks.length > 0 && <p className="text-[11px] text-muted-foreground">This is an incomplete response. The received text and evidence have been preserved.</p>}
     {sources.length > 0 ? <Trace><TraceCollapsible>
-      <TraceCollapsibleTrigger><TraceLine><TraceIcon><InterfaceIcon icon={FileTextIcon} size="xs" /></TraceIcon><TraceTitle className="text-xs">Sources · {sources.length}</TraceTitle></TraceLine></TraceCollapsibleTrigger>
+      <TraceCollapsibleTrigger><TraceLine><TraceIcon><FlaticonIcon name="sources" /></TraceIcon><TraceTitle className="text-xs">Sources · {sources.length}</TraceTitle></TraceLine></TraceCollapsibleTrigger>
       <TraceCollapsibleContent keepMounted><Trace className="gap-3">{sources.map(source => <TraceCollapsible key={source.source_id}>
         <TraceCollapsibleTrigger><TraceLine><TraceIcon><InterfaceIcon icon={FileTextIcon} size="xs" /></TraceIcon><TraceTitle className="text-xs">[{source.citation_number}] {sourceTitle(source)}</TraceTitle>{sourceLocation(source) && <TraceDescription className="max-w-40 truncate text-[10px]">{sourceLocation(source)}</TraceDescription>}</TraceLine></TraceCollapsibleTrigger>
         <TraceCollapsibleContent keepMounted className="space-y-2 text-xs leading-6"><p>{source.excerpt}</p>{sourceLocation(source) && <p className="text-[10px]">{sourceLocation(source)}</p>}<div className="flex flex-wrap items-center gap-3"><Button variant="link" size="sm" onClick={() => onInspect(source)} className="h-auto p-0 text-xs">Inspect evidence</Button>{safeSourceUrl(source.url) ? <a href={safeSourceUrl(source.url)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs underline underline-offset-4">Open document<ArrowUpRightIcon className="size-3" /><span className="sr-only"> (opens in a new tab)</span></a> : <span className="text-[10px]">No document link was provided.</span>}</div></TraceCollapsibleContent>

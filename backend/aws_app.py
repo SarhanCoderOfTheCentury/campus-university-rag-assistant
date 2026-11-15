@@ -9,9 +9,11 @@ from fastapi.responses import JSONResponse
 from .main import create_app
 from .protocol import ChatRequest,Identifier,StrictModel
 from .university import UniversityAgent
+from .memory import DynamoMemory
 
 ddb=boto3.client('dynamodb')
 TABLE=os.getenv('RAG_LIMIT_TABLE','campus-rag-limits')
+memory_store=DynamoMemory(ddb,TABLE)
 ORIGINS=[x.strip() for x in os.getenv('RAG_ALLOWED_ORIGINS','').split(',') if x.strip()]
 
 def validate_origin(request):
@@ -39,12 +41,13 @@ def cancel_key(request):
 
 async def cancelled(request):
     result=await asyncio.to_thread(ddb.get_item,TableName=TABLE,Key={'pk':{'S':cancel_key(request)}},ConsistentRead=True,ProjectionExpression='cancelled')
-    return result.get('Item',{}).get('cancelled',{}).get('BOOL',False)
+    explicit=result.get('Item',{}).get('cancelled',{}).get('BOOL',False)
+    return explicit or (request.session_token is not None and not await asyncio.to_thread(memory_store.current,request))
 
 @lru_cache(maxsize=1)
 def agent():
     value=boto3.client('secretsmanager').get_secret_value(SecretId=os.getenv('RAG_PROVIDER_SECRET','campus-rag/gemini'))
-    return UniversityAgent(json.loads(value['SecretString'])['GEMINI_API_KEY'],cancelled=cancelled)
+    return UniversityAgent(json.loads(value['SecretString'])['GEMINI_API_KEY'],cancelled=cancelled,memory_store=memory_store)
 
 async def factory(principal):return await asyncio.to_thread(agent)
 
@@ -61,7 +64,7 @@ async def size_limit(request:Request,call_next):
 @app.get('/health')
 async def health():
     manifest=json.loads((Path(__file__).parent/'data/manifest.json').read_text())
-    return {'status':'ok','service':'campus-rag','protocol_version':1,'indexed_chunks':manifest['chunks'],'embedding_model':manifest['embedding_model'],'model':os.getenv('GEMINI_MODEL','gemini-3.5-flash-lite'),'release':os.getenv('RAG_RELEASE','unknown')}
+    return {'status':'ok','service':'campus-rag','protocol_version':1,'indexed_chunks':manifest['chunks'],'embedding_model':manifest['embedding_model'],'model':os.getenv('GEMINI_MODEL','gemini-3.5-flash-lite'),'release':os.getenv('RAG_RELEASE','unknown'),'memory':'isolated-conversation-context','memory_idle_ttl_seconds':86400}
 
 class CancelRequest(StrictModel):
     conversation_id:Identifier

@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-15T10:34:08Z",
+  "transport": "Real LangChain model and AWS DynamoDB; empty client history on each request",
+  "checks": {
+    "remember_volunteered_preferences": "passed",
+    "recall_across_requests": "passed",
+    "correct_previous_preference": "passed",
+    "recall_corrected_preference": "passed",
+    "forget_preference": "passed",
+    "forgotten_value_not_recalled": "passed"
+  },
+  "completed_turns": 6,
+  "transcripts_included": false,
+  "passed": true
+}

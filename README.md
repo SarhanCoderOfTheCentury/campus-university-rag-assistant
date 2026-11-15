@@ -10,6 +10,8 @@ Use Node.js 22, root directory `./`, install `npm ci`, build `npm run build`, ou
 
 The production API entrypoint is `backend.aws_app:app`, and the curated system prompt is `backend/system_prompt.txt`. Existing FastAPI protocol examples are preserved. The separate Streamlit application below is not part of the Vercel deployment.
 
+The React/AWS agent has [isolated active-conversation memory](docs/SESSION-MEMORY.md): typed preferences and bounded recent turns in DynamoDB, correction/forget support, stale-request protection and a 24-hour idle expiry. Tab refreshes restore the conversation and citations. Official [Flaticon navigation icons and attribution](FLATICON-LICENSE.md) are included locally without a runtime CDN dependency.
+
 The working **Streamlit + LangChain + Gemini + local FAISS agent** is in [`streamlit-agent/`](streamlit-agent/README.md). It uses the supplied **584 DSU embeddings** and includes an isolated fictional dataset for the assignment's dated-policy and security tests.
 
 The existing React interface and FastAPI integration example are preserved. They remain a separate application; the Streamlit agent is the complete application delivered by this update.

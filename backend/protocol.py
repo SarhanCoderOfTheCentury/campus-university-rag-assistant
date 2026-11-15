@@ -38,6 +38,13 @@ class ChatRequest(StrictModel):
     message_id: Identifier
     question: str = Field(min_length=1, max_length=8000)
     history: list[HistoryMessage] = Field(default_factory=list, max_length=40)
+    session_token: str | None = Field(default=None,min_length=32,max_length=128,pattern=r'^[A-Za-z0-9_-]+$')
+    client_turn: int | None = Field(default=None,ge=1,le=9007199254740991)
+
+    @model_validator(mode='after')
+    def memory_identity(self):
+        if (self.session_token is None)!=(self.client_turn is None):raise ValueError('Session memory requires both identity fields')
+        return self
 
 class Envelope(StrictModel):
     protocol_version: Literal[1] = 1

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useRef, useState } from 'react'
-import { ArrowUpIcon, BookOpenIcon, ChevronRightIcon, GraduationCapIcon, LibraryIcon, MessageSquareIcon, MoonIcon, PauseIcon, PlayIcon, PlusIcon, SquareIcon, SunIcon } from 'lucide-react'
+import { ArrowUpIcon, BookOpenIcon, ChevronRightIcon, GraduationCapIcon, MoonIcon, PauseIcon, PlayIcon, PlusIcon, SquareIcon, SunIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Bubble, BubbleContent } from '@/components/ui/bubble'
@@ -18,6 +18,7 @@ import { useRagChat } from '@/hooks/use-rag-chat'
 import { Spinner } from '@/components/ui/spinner'
 import { SourceInspector } from '@/components/chat/SourceInspector'
 import { InterfaceIcon } from '@/components/education/InterfaceIcon'
+import { FlaticonIcon } from '@/components/education/FlaticonIcon'
 import { isRunning } from '@/lib/rag/state'
 import type { EvidenceSource } from '@/lib/rag/protocol'
 import type { AssistantMessage } from '@/lib/rag/session'
@@ -32,8 +33,8 @@ export default function App() {
 
 function CampusAssistant() {
   const { setOpen, setOpenMobile } = useSidebar()
-  const { conversations, session, backendConfigured } = useRagChat()
-  const [activeId, setActiveId] = useState('new-conversation')
+  const { conversations, session, backendConfigured, activeConversationId:activeId } = useRagChat()
+  const setActiveId=session.setActiveConversation
   const [drafts, setDrafts] = useState<Record<string, string>>({})
   const [sourcesOpen, setSourcesOpen] = useState(false)
   const [selectedSource, setSelectedSource] = useState<string | null>(null)
@@ -99,15 +100,15 @@ function CampusAssistant() {
               <SidebarGroupLabel className="mb-2 text-[10px] font-medium tracking-[0.14em] uppercase">Workspace</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
-                  <SidebarMenuItem><SidebarMenuButton aria-label="Conversations" tooltip="Conversations" isActive onClick={() => selectConversation(active.id)}><InterfaceIcon icon={MessageSquareIcon} size="xs" /><span>Conversations</span></SidebarMenuButton></SidebarMenuItem>
-                  <SidebarMenuItem><SidebarMenuButton aria-label="Source documents" tooltip="Source documents" onClick={openSources}><InterfaceIcon icon={LibraryIcon} size="xs" /><span>Source documents</span></SidebarMenuButton></SidebarMenuItem>
+                  <SidebarMenuItem><SidebarMenuButton aria-label="Conversations" tooltip="Conversations" isActive onClick={() => selectConversation(active.id)}><FlaticonIcon name="conversation" /><span>Conversations</span></SidebarMenuButton></SidebarMenuItem>
+                  <SidebarMenuItem><SidebarMenuButton aria-label="Source documents" tooltip="Source documents" onClick={openSources}><FlaticonIcon name="sources" /><span>Source documents</span></SidebarMenuButton></SidebarMenuItem>
                 </SidebarMenu>
               </SidebarGroupContent>
             </SidebarGroup>
             <SidebarGroup>
               <SidebarGroupLabel className="mb-2 text-[10px] font-medium tracking-[0.14em] uppercase">Conversations</SidebarGroupLabel>
               <SidebarGroupContent><SidebarMenu>
-                {conversations.map((chat) => <SidebarMenuItem key={chat.id}><SidebarMenuButton aria-label={chat.title} tooltip={chat.title} onClick={() => selectConversation(chat.id)} isActive={chat.id === activeId} className="h-auto min-h-9 items-start py-2 text-xs"><InterfaceIcon icon={MessageSquareIcon} size="xs" className="mt-0.5" /><span className="line-clamp-2 whitespace-normal leading-5 group-data-[collapsible=icon]:hidden">{chat.title}</span></SidebarMenuButton></SidebarMenuItem>)}
+                {conversations.map((chat) => <SidebarMenuItem key={chat.id}><SidebarMenuButton aria-label={chat.title} tooltip={chat.title} onClick={() => selectConversation(chat.id)} isActive={chat.id === activeId} className="h-auto min-h-9 items-start py-2 text-xs"><FlaticonIcon name="conversation" className="mt-0.5" /><span className="line-clamp-2 whitespace-normal leading-5 group-data-[collapsible=icon]:hidden">{chat.title}</span></SidebarMenuButton></SidebarMenuItem>)}
               </SidebarMenu></SidebarGroupContent>
             </SidebarGroup>
           </SidebarContent>
@@ -122,6 +123,7 @@ function CampusAssistant() {
             </SidebarMenu>
             <Separator />
             <Item size="sm" className="gap-2.5 p-0 pt-1"><ItemMedia className="shrink-0"><InterfaceIcon icon={GraduationCapIcon} size="md" /></ItemMedia><ItemContent className="gap-0.5 group-data-[collapsible=icon]:hidden"><ItemTitle className="text-xs">Campus workspace</ItemTitle><ItemDescription className="text-[10px]">{backendConfigured ? 'Document-grounded answers' : 'Knowledge base not connected'}</ItemDescription></ItemContent></Item>
+            <a href="https://www.flaticon.com/uicons" target="_blank" rel="noopener noreferrer" className="text-[9px] text-muted-foreground group-data-[collapsible=icon]:hidden">UIcons by Flaticon</a>
           </SidebarFooter>
         </Sidebar>
 

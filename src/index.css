@@ -120,6 +120,15 @@
   button, a, textarea { -webkit-tap-highlight-color: transparent; }
 }
 
+@font-face {
+  font-family: 'Campus Flaticon';
+  src: url('/fonts/campus-flaticon.woff2') format('woff2');
+  font-display: block;
+  font-style: normal;
+  font-weight: 400;
+}
+.campus-flaticon { font-family: 'Campus Flaticon' !important; font-style: normal; font-weight: 400; font-variant: normal; text-transform: none; -webkit-font-smoothing: antialiased; }
+
 
 /* No browser/shadcn outline rings. Focus remains visible through surface lift. */
 .app-shell :where(button, a, input, textarea, [role='button']):focus-visible {

@@ -6,7 +6,7 @@ from rank_bm25 import BM25Okapi
 from backend.ingest import normalize
 from backend.university import Plan, Section, UniversityAgent, clean_markdown
 from backend.rag import GroundingError
-from backend.protocol import Source
+from backend.protocol import Source,ChatRequest
 
 def test_ingestion_preserves_real_metadata_and_policy_scope():
     row={'id':'curated-test','document_file':'04_previous_policy.md','title':'History status','content':'No authenticated older policy exists.','source_url':None,'retrieval_policy':'historical_comparison_only_no_current_policy_answers'}
@@ -31,7 +31,7 @@ async def test_explicit_cancellation_stops_an_inflight_operation():
     agent=object.__new__(UniversityAgent)
     cleaned=asyncio.Event()
     async def check(_):return True
-    async def slow(_):
+    async def slow(_,memory=None):
         try:
             await asyncio.Event().wait()
             yield {}
@@ -39,7 +39,8 @@ async def test_explicit_cancellation_stops_an_inflight_operation():
     agent.cancelled=check
     agent._events=slow
     with pytest.raises(asyncio.CancelledError):
-        await asyncio.wait_for(anext(agent.events(object())),3)
+        request=ChatRequest(protocol_version=1,conversation_id='cancel-fixture',request_id='cancel-request',message_id='cancel-message',question='Fixture question',history=[])
+        await asyncio.wait_for(anext(agent.events(request)),3)
     assert cleaned.is_set()
 
 @pytest.mark.asyncio
