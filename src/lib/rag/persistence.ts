@@ -3,7 +3,9 @@ import {chatRequestSchema,sourceSchema} from './protocol'
 import {isRunning,stopRun} from './state'
 import type {Conversation} from './session'
 
-export const SESSION_KEY='campus-chat-session-v1'
+// A new corpus starts a clean browser context; old cited answers cannot masquerade
+// as answers from the replacement dataset.
+export const SESSION_KEY='campus-chat-session-v2-dsu-bundle'
 const TTL=24*60*60*1000
 const activity=z.object({id:z.string(),kind:z.enum(['retrieval','document','discovery','summary']),label:z.string(),status:z.enum(['running','completed','failed','interrupted']),detail:z.string().optional(),documentId:z.string().optional(),sourceIds:z.array(z.string()).optional()})
 const run=z.object({request:chatRequestSchema,runId:z.string().optional(),sequence:z.number().int().nonnegative(),status:z.enum(['connecting','processing','answering','completed','failed','interrupted','cancelled']),activities:z.array(activity),sources:z.record(z.string(),sourceSchema),blocks:z.array(z.object({id:z.string(),text:z.string(),sourceIds:z.array(z.string()),kind:z.enum(['grounded','notice'])})),selectedSourceIds:z.array(z.string()),sourcesFinal:z.boolean(),reasoningOpen:z.boolean(),outcome:z.enum(['answered','no_evidence','clarification']).optional(),elapsedMs:z.number().optional(),error:z.object({code:z.string(),message:z.string()}).optional()})

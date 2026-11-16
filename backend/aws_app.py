@@ -5,7 +5,7 @@ from pathlib import Path
 import boto3
 from botocore.exceptions import ClientError
 from fastapi import HTTPException,Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse,PlainTextResponse
 from .main import create_app
 from .protocol import ChatRequest,Identifier,StrictModel
 from .university import UniversityAgent
@@ -13,7 +13,8 @@ from .memory import DynamoMemory
 
 ddb=boto3.client('dynamodb')
 TABLE=os.getenv('RAG_LIMIT_TABLE','campus-rag-limits')
-memory_store=DynamoMemory(ddb,TABLE)
+CORPUS=json.loads((Path(__file__).parent/'data/manifest.json').read_text())
+memory_store=DynamoMemory(ddb,TABLE,namespace=CORPUS['dataset_sha256'])
 ORIGINS=[x.strip() for x in os.getenv('RAG_ALLOWED_ORIGINS','').split(',') if x.strip()]
 
 def validate_origin(request):
@@ -47,7 +48,7 @@ async def cancelled(request):
 @lru_cache(maxsize=1)
 def agent():
     value=boto3.client('secretsmanager').get_secret_value(SecretId=os.getenv('RAG_PROVIDER_SECRET','campus-rag/gemini'))
-    return UniversityAgent(json.loads(value['SecretString'])['GEMINI_API_KEY'],cancelled=cancelled,memory_store=memory_store)
+    return UniversityAgent(json.loads(value['SecretString'])['GEMINI_API_KEY'],cancelled=cancelled,memory_store=memory_store,document_base_url=os.getenv('RAG_DOCUMENT_BASE_URL','https://vrn7rkajt4fke7okwkdrjj5jpq0zhfws.lambda-url.us-east-1.on.aws/api/documents'))
 
 async def factory(principal):return await asyncio.to_thread(agent)
 
@@ -64,7 +65,12 @@ async def size_limit(request:Request,call_next):
 @app.get('/health')
 async def health():
     manifest=json.loads((Path(__file__).parent/'data/manifest.json').read_text())
-    return {'status':'ok','service':'campus-rag','protocol_version':1,'indexed_chunks':manifest['chunks'],'embedding_model':manifest['embedding_model'],'model':os.getenv('GEMINI_MODEL','gemini-3.5-flash-lite'),'release':os.getenv('RAG_RELEASE','unknown'),'memory':'isolated-conversation-context','memory_idle_ttl_seconds':86400}
+    return {'status':'ok','service':'campus-rag','protocol_version':1,'indexed_chunks':manifest['chunks'],'embedding_model':manifest['embedding_model'],'model':os.getenv('GEMINI_MODEL','gemini-3.5-flash-lite'),'release':os.getenv('RAG_RELEASE','unknown'),'memory':'isolated-conversation-context','memory_idle_ttl_seconds':86400,'dataset_revision':manifest['dataset_sha256'][:16],'dataset_kind':manifest.get('dataset_kind'),'pipeline_version':manifest.get('pipeline_version')}
+
+@app.get('/api/documents/{document_id}',response_class=PlainTextResponse)
+async def document(document_id:str):
+    if document_id not in {'DSU-01','DSU-02','DSU-03','DSU-04','DSU-05'}:raise HTTPException(404,'Document not found')
+    return PlainTextResponse((Path(__file__).parent/'data/documents'/(document_id+'.md')).read_text(),headers={'Cache-Control':'public, max-age=300'})
 
 class CancelRequest(StrictModel):
     conversation_id:Identifier

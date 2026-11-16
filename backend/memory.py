@@ -60,9 +60,9 @@ class TurnMemory:
     next_notes:Notes|None=None
 
 class DynamoMemory:
-    def __init__(self,client,table):self.client=client;self.table=table
+    def __init__(self,client,table,namespace=''):self.client=client;self.table=table;self.namespace=namespace
     def key(self,request):
-        return 'memory:'+hashlib.sha256((request.session_token+'|'+request.conversation_id).encode()).hexdigest()
+        return 'memory:'+hashlib.sha256((self.namespace+'|'+request.session_token+'|'+request.conversation_id).encode()).hexdigest()
     def begin(self,request):
         if not request.session_token:return TurnMemory(recent=bounded_history([m.model_dump() for m in request.history]))
         try:

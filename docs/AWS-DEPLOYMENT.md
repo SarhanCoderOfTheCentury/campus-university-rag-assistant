@@ -15,17 +15,17 @@ The React application connects directly to the HTTPS Lambda Function URL. Vercel
 
 ## Dataset and Colab adaptation
 
-`backend/data/` contains 465 normalized passages from the uploaded five-document corpus, original extracted supporting records, five readable curated documents, the policy-conflict record, and a 768-dimensional normalized Gemini embedding matrix. `manifest.json` records the original archive SHA-256, indexed-record hash, vector hash and embedding model. Runtime validates both file hashes and vector dimensions. Index ingestion checkpoints embedding batches and observes actual provider rate-limit waits.
+`backend/data/` now contains 45 complete sections from the replacement `dsu_rag_bundle.zip`, five readable source documents, and a freshly generated 45 × 768 normalized Gemini embedding matrix. This is the supplied fictional classroom corpus; a small input label identifies that scope. The old 465-section snapshot is not mixed with it. `manifest.json` records the archive SHA-256, content hashes, row order, task types, model, dimensions and build time. Runtime validates hashes, dimensions, finite unit vectors and source-row alignment. See [the complete pipeline guide](EMBEDDING-PIPELINE.md).
 
-The Colab's workflow is adapted in `backend/university.py`: query rewriting with conversation references, semantic similarity plus BM25, reciprocal-rank fusion, model reranking, bounded multi-document context, and failure handling. Broad programme lists prefer individually sourced curated programme pages over an inconsistent broad FAQ snapshot. Current-policy retrieval excludes historical-only records. Ambiguous flattened fee rows are excluded; numeric fee rows must have verified source alignment.
+The Colab's workflow is adapted in `backend/university.py`: contextual query rewriting, semantic similarity plus BM25, reciprocal-rank fusion, model reranking, metadata-driven coverage and failure handling. Broad catalogues include all nine programme sections. Normal questions exclude archived policy; historical comparisons retain both versions. Library questions expose the overview/FAQ fine conflict. Current rules and exceptions remain in the same section. Citations include section, version, status and effective date; the public `/api/documents/DSU-01` through `DSU-05` routes serve the uploaded source content.
 
-`backend/system_prompt.txt` instructs the model to answer directly with short paragraphs, headings, bullets and numbered steps. It prohibits invented facts, unsupported currentness, instructions embedded in documents and private model reasoning. It explains the unresolved application-fee conflict and absence of authenticated older policy versions. Source capture dates are unknown; the system does not claim live university verification.
+`backend/system_prompt.txt` instructs the model to answer directly using headings, lists, numbered steps and intact GFM tables. It requires all requested details and material exceptions, distinguishes v3.0 and archived v2.1, preserves unresolved source conflicts, and prohibits invented facts, document instructions and private reasoning. Generic classroom-data disclaimers stay in the input label, rather than every response. Explicit authenticity questions are answered honestly.
 
 Gemini 3.5 Flash-Lite is primary. Gemini 3.1 Flash-Lite is a same-provider fallback verified callable with the configured key when a model call fails before producing usable output. This addresses transient provider failures observed during live testing; no response is replaced after its text has been emitted. Both routes undergo the same grounding checks.
 
 ## Grounding and streaming
 
-LangChain generates structured answer sections progressively. Once a section is fully parsed, its citation IDs must exist in the retrieved catalog. The backend attaches the exact original excerpts directly; the model does not generate quotation strings. A second model call reviews all claims against the full cited passages. One bounded repair is permitted before repeating validation. A failed section never reaches the UI. This reduces unsupported claims but is not a mathematical guarantee of semantic correctness; students must inspect official sources for consequential decisions.
+LangChain generates a complete typed answer with a required completion field. Citation IDs must exist in the retrieved catalog. A second model call checks the full answer for factual support and question coverage; programme and requested-table coverage also have deterministic checks. One whole-answer repair is permitted. No draft section is published before the entire answer passes. The backend then emits verified complete Markdown blocks without artificial delays; tables are never split between blocks. The model does not manufacture source excerpts. Model review reduces errors but does not mathematically guarantee semantic correctness.
 
 The interface streams sections as they pass validation, rather than faking character-by-character output. Real rewrite, retrieval, context-selection and answer-validation operations drive activity events. The UI renders Markdown through Streamdown and attaches numbered citations from authoritative metadata. Only cited sources are finalized. The wire protocol remains [STREAMING-CONTRACT.md](STREAMING-CONTRACT.md).
 
@@ -48,7 +48,7 @@ Use Python 3.12 and standard AWS CLI credentials for an authorized deployment id
 ```bash
 python -m pip install -r backend/requirements-test.txt
 # Re-ingest only when documents change. The original user ZIP is not a provider secret.
-python -m backend.ingest /path/to/dsu_five_document_rag.zip
+python -m backend.ingest /path/to/dsu_rag_bundle.zip --fresh
 python -m pytest -q
 python backend/deploy/package.py
 AWS_DEFAULT_REGION=us-east-1 python backend/deploy/deploy.py \

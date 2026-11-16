@@ -1,0 +1,22 @@
+{
+  "dataset_sha256": "fdd9679f9a7269516caed742874bd3cfbb36c0e211a54572346a7e7c4d605c59",
+  "backend_release": "36c65ebc9471",
+  "chunks": 45,
+  "documents": 5,
+  "fresh_embedding_batches": 6,
+  "embedding_model": "gemini-embedding-001",
+  "dimensions": 768,
+  "frontend_tests": 60,
+  "backend_tests": 33,
+  "node_22_build": "passed",
+  "real_model_checks": [
+    {"case": "catalogue", "passed": true, "source_count": 10, "seconds": 26.5},
+    {"case": "attendance", "passed": true, "source_count": 1, "seconds": 12.5},
+    {"case": "comparison", "passed": true, "source_count": 8, "seconds": 31.3},
+    {"case": "library_conflict", "passed": true, "source_count": 2, "seconds": 18.5},
+    {"case": "admissions", "passed": true, "source_count": 1, "seconds": 8.5},
+    {"case": "refund", "passed": true, "source_count": 2, "seconds": 10.3},
+    {"case": "missing", "passed": true, "source_count": 0, "seconds": 3.3}
+  ],
+  "test_note": "The initial comparison-format assertion did not accept a valid aligned GFM separator. The assertion was corrected and the comparison case was rerun successfully. No provider output was simulated."
+}

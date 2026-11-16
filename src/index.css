@@ -189,3 +189,13 @@ html, body, #root { height: 100%; overflow: hidden; }
 
 /* Official Streamdown markdown renderer recommended by shadcn AI Elements. */
 @source "../node_modules/streamdown/dist/*.js";
+
+/* Keep the official Streamdown table renderer and controls. Wide tables scroll
+   inside the answer rather than widening the conversation or losing cells. */
+.rag-markdown { overflow-wrap: anywhere; }
+.rag-markdown [data-streamdown="table-wrapper"] { max-width: 100%; min-width: 0; }
+.rag-markdown [data-streamdown="table-wrapper"] > div:last-child { max-height: none !important; }
+.rag-markdown [data-streamdown="table"] { width: 100%; font-size: 0.8125rem; line-height: 1.6; }
+.rag-markdown :is(th, td) { white-space: normal; min-width: 6rem; padding: 0.65rem 0.8rem; vertical-align: top; }
+.rag-markdown th { font-weight: 500; }
+.rag-markdown strong { font-weight: 600; }

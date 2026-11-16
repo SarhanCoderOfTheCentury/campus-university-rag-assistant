@@ -2,7 +2,7 @@
 
 ## React frontend on Vercel, LangChain RAG backend on AWS
 
-The root React/Vite application connects to the Python LangChain service on AWS Lambda through a real HTTPS SSE stream. See [the deployed AWS service and operating guide](docs/AWS-DEPLOYMENT.md). The agent searches 465 supplied DSU passages using Gemini embeddings, BM25, reciprocal-rank fusion and reranking, then checks formatted answer sections against retrieved evidence before displaying them with citations.
+The root React/Vite application connects to the Python LangChain service on AWS Lambda through a real HTTPS SSE stream. See [the deployed AWS service and operating guide](docs/AWS-DEPLOYMENT.md). Its replacement corpus is the uploaded `dsu_rag_bundle.zip`: 45 sections from five classroom documents, freshly embedded using Gemini, searched with BM25/vector fusion and reranking. Complete answers undergo source-support and coverage checks before their Markdown sections and citations are emitted. [Rebuild and validation guide](docs/EMBEDDING-PIPELINE.md).
 
 Frontend: https://campus-university-rag-assistant-dqa.vercel.app/
 

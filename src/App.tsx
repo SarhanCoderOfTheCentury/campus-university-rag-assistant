@@ -168,7 +168,7 @@ function CampusAssistant() {
                 <InputGroup className="prompt-surface rounded-2xl border-0 bg-background shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-0 has-[[data-slot=input-group-control]:focus-visible]:ring-0">
                   <InputGroupTextarea ref={inputRef} aria-label="Ask the university assistant" aria-describedby="prompt-help" value={draft} onChange={(event) => setDrafts((previous) => ({ ...previous, [activeId]: event.target.value }))} onKeyDown={(event) => { if (event.key === 'Escape' && busy && !event.nativeEvent.isComposing) { event.preventDefault(); session.cancel(activeId); return } if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void submit() } }} placeholder="Ask about your university…" className="min-h-[66px] max-h-40 resize-none px-4 pt-4 pb-2 text-sm" maxLength={8000}  />
                   <InputGroupAddon align="block-end" className="justify-between gap-3 px-4 pb-3">
-                    <InputGroupText className="gap-1.5 text-[10px]"><InterfaceIcon icon={BookOpenIcon} size="xs" />University documents</InputGroupText>
+                    <InputGroupText className="gap-1.5 text-[10px]" title="Answers use the supplied fictional classroom dataset, not official university records."><InterfaceIcon icon={BookOpenIcon} size="xs" />Classroom dataset · Not official</InputGroupText>
                     <div className="ml-auto flex items-center gap-3">
                       <InputGroupText id="prompt-help" className="hidden gap-1.5 text-[10px] sm:flex"><Kbd className="h-4.5 border-0 px-1 text-[9px] shadow-inner">↵</Kbd>to ask<span className="mx-1">·</span><KbdGroup><Kbd className="h-4.5 border-0 px-1 text-[9px] shadow-inner">Shift</Kbd><Kbd className="h-4.5 border-0 px-1 text-[9px] shadow-inner">↵</Kbd></KbdGroup>new line</InputGroupText>
                       {busy ? <Button type="button" size="icon-lg" className="rounded-full border-0" aria-label="Stop generating" title="Stop generating" onClick={() => session.cancel(activeId)}><SquareIcon className="size-3.5 fill-current" /></Button> : <Button type="submit" size="icon-lg" className="rounded-full border-0" aria-label="Send message" title="Send message" disabled={!draft.trim()}><ArrowUpIcon className="size-4" /></Button>}
@@ -176,7 +176,7 @@ function CampusAssistant() {
                   </InputGroupAddon>
                 </InputGroup>
               </form>
-              <p className="mt-3 text-center text-[10px] leading-4 text-muted-foreground">{backendConfigured ? 'Check the cited documents for official university guidance.' : 'Knowledge base not connected. Questions cannot be answered yet.'}</p>
+              <p className="mt-3 text-center text-[10px] leading-4 text-muted-foreground">{backendConfigured ? 'Answers are grounded in the uploaded documents. Inspect citations for details.' : 'Knowledge base not connected. Questions cannot be answered yet.'}</p>
             </div>
           </footer>
         </SidebarInset>
