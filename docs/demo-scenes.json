@@ -1,0 +1,247 @@
+[
+  {
+    "file": "docs/demo-capture/welcome.jpg",
+    "duration": 4.5,
+    "eyebrow": "01 / Meet Campus",
+    "title": "A little clarity for university life.",
+    "description": "A focused university assistant, built around documents and the questions students actually ask."
+  },
+  {
+    "file": "docs/demo-capture/prompt.jpg",
+    "duration": 3,
+    "eyebrow": "02 / Ask naturally",
+    "title": "One question. A clear answer.",
+    "description": "Ask for programmes, fees, policies or a comparison. Choose the format that helps you understand."
+  },
+  {
+    "file": "docs/demo-capture/table.jpg",
+    "duration": 9,
+    "eyebrow": "03 / Read clearly",
+    "title": "All programmes. One readable table.",
+    "description": "Nine programmes, semester tuition and duration, rendered as a real Markdown table with source citations."
+  },
+  {
+    "file": "docs/demo-capture/activity.jpg",
+    "duration": 5,
+    "eyebrow": "04 / Stay informed",
+    "title": "See the work behind the answer.",
+    "description": "Expand the actual activity timeline to inspect the completed document retrieval and answer checks."
+  },
+  {
+    "file": "docs/demo-capture/comparison-prompt.jpg",
+    "duration": 3,
+    "eyebrow": "06 / Compare policies",
+    "title": "Understand what changed.",
+    "description": "A second question asks for current and archived attendance rules, including laboratory and medical exceptions."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0000.jpg",
+    "duration": 0.823,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0001.jpg",
+    "duration": 0.845,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0002.jpg",
+    "duration": 0.654,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0003.jpg",
+    "duration": 0.483,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0004.jpg",
+    "duration": 0.586,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0005.jpg",
+    "duration": 0.565,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0006.jpg",
+    "duration": 0.72,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0007.jpg",
+    "duration": 0.622,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0008.jpg",
+    "duration": 0.604,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0009.jpg",
+    "duration": 0.591,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0010.jpg",
+    "duration": 0.556,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0011.jpg",
+    "duration": 0.523,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0012.jpg",
+    "duration": 0.485,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0013.jpg",
+    "duration": 0.838,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0014.jpg",
+    "duration": 0.572,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0015.jpg",
+    "duration": 0.46,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0016.jpg",
+    "duration": 0.532,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0017.jpg",
+    "duration": 0.542,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0018.jpg",
+    "duration": 0.501,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0019.jpg",
+    "duration": 0.473,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0020.jpg",
+    "duration": 0.424,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0021.jpg",
+    "duration": 0.626,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0022.jpg",
+    "duration": 0.477,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0023.jpg",
+    "duration": 0.577,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0024.jpg",
+    "duration": 0.46,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0025.jpg",
+    "duration": 0.543,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-0026.jpg",
+    "duration": 0.6,
+    "eyebrow": "07 / Actual live capture",
+    "title": "Follow real document activity.",
+    "description": "The agent retrieves the policy versions and prepares a source-checked comparison. This sequence uses the actual captured UI."
+  },
+  {
+    "file": "docs/demo-capture/comparison-final.jpg",
+    "duration": 9,
+    "eyebrow": "08 / Understand precisely",
+    "title": "Rules, exceptions and dates.",
+    "description": "Compare 75% and 80% class attendance, the unchanged 85% laboratory rule, and medical certificate deadlines."
+  },
+  {
+    "file": "docs/demo-capture/policy-sources.jpg",
+    "duration": 8,
+    "eyebrow": "09 / Verify the versions",
+    "title": "Read the supporting passage.",
+    "description": "Open the source to inspect its exact attendance rule, laboratory exception, medical deadline and policy version."
+  },
+  {
+    "file": "docs/demo-capture/comparison-final.jpg",
+    "duration": 4,
+    "eyebrow": "Campus / University assistant",
+    "title": "Ask. Understand. Verify.",
+    "description": "Explore the live agent on the Vercel frontend. Every answer starts with the supplied knowledge base."
+  }
+]

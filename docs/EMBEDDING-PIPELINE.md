@@ -27,7 +27,7 @@ No URL or page number is inferred from a title. The source viewer routes serve e
 
 ## Retrieval and answer quality
 
-Hybrid cosine/BM25 ranking uses reciprocal-rank fusion, followed by LLM relevance ranking over real passages. Archived sections are excluded by default. Comparisons include both policy versions; broad catalogues retain all nine programmes even if the reranker drops one. Library queries preserve both Rs. 20 and Rs. 25 fine passages: the corpus does not establish which supersedes the other.
+Focused retrieval uses hybrid cosine/BM25 ranking with reciprocal-rank fusion; complete catalogue and policy scopes use authoritative metadata directly. The [performance update](PERFORMANCE.md) removes the separate generative reranker for this small corpus. Archived sections are excluded by default. Comparisons include both policy versions and broad catalogues retain all nine programmes. Library queries preserve both Rs. 20 and Rs. 25 fine passages: the corpus does not establish which supersedes the other.
 
 A typed answer contains up to 12 intact Markdown sections plus a completion flag. A whole-answer review checks both grounding and completeness, including exceptions, units, dates, all requested subquestions and unresolved contradictions. A single repair can correct a failed draft. Unknown citations or a second failed review stop the response instead of presenting it as complete. This is a useful validation layer, not a universal proof of factual correctness.
 

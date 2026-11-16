@@ -21,7 +21,7 @@ The Colab's workflow is adapted in `backend/university.py`: contextual query rew
 
 `backend/system_prompt.txt` instructs the model to answer directly using headings, lists, numbered steps and intact GFM tables. It requires all requested details and material exceptions, distinguishes v3.0 and archived v2.1, preserves unresolved source conflicts, and prohibits invented facts, document instructions and private reasoning. Generic classroom-data disclaimers stay in the input label, rather than every response. Explicit authenticity questions are answered honestly.
 
-Gemini 3.5 Flash-Lite is primary. Gemini 3.1 Flash-Lite is a same-provider fallback verified callable with the configured key when a model call fails before producing usable output. This addresses transient provider failures observed during live testing; no response is replaced after its text has been emitted. Both routes undergo the same grounding checks.
+Gemini 3.1 Flash-Lite is now primary, with Gemini 3.5 Flash-Lite as fallback, both at minimal thinking. Both routes undergo the same whole-answer grounding and coverage checks. The [performance update](PERFORMANCE.md) removes the separate generative reranker, adds conservative local routing and bounded query-embedding reuse, coalesces cancellation reads, and configures Lambda at 1,792 MB. No response is replaced after its text has been emitted. Provider/network failures remain possible.
 
 ## Grounding and streaming
 

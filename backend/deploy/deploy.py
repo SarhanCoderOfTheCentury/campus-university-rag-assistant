@@ -42,17 +42,17 @@ def main():
         aws('dynamodb','wait','table-exists','--table-name',table)
         aws('dynamodb','update-time-to-live','--table-name',table,'--time-to-live-specification','Enabled=true,AttributeName=expires_at')
     release=hashlib.sha256(archive.read_bytes()).hexdigest()[:12]
-    env={'Variables':{'AWS_LAMBDA_EXEC_WRAPPER':'/opt/bootstrap','AWS_LWA_INVOKE_MODE':'response_stream','AWS_LWA_READINESS_CHECK_PATH':'/health','PORT':'8000','RAG_ALLOWED_ORIGINS':args.origin,'RAG_PROVIDER_SECRET':provider,'RAG_LIMIT_TABLE':table,'RAG_DAILY_LIMIT':'100','GEMINI_MODEL':'gemini-3.5-flash-lite','RAG_RELEASE':release,'PYTHONUNBUFFERED':'1'}}
+    env={'Variables':{'AWS_LAMBDA_EXEC_WRAPPER':'/opt/bootstrap','AWS_LWA_INVOKE_MODE':'response_stream','AWS_LWA_READINESS_CHECK_PATH':'/health','PORT':'8000','RAG_ALLOWED_ORIGINS':args.origin,'RAG_PROVIDER_SECRET':provider,'RAG_LIMIT_TABLE':table,'RAG_DAILY_LIMIT':'100','GEMINI_MODEL':'gemini-3.1-flash-lite','RAG_RELEASE':release,'PYTHONUNBUFFERED':'1'}}
     layer=f'arn:aws:lambda:{region}:753240598075:layer:LambdaAdapterLayerX86:30'
     if aws('lambda','get-function','--function-name',name,optional=True):
         aws('lambda','update-function-code','--function-name',name,'--s3-bucket',bucket,'--s3-key',artifact)
         aws('lambda','wait','function-updated','--function-name',name)
-        aws('lambda','update-function-configuration','--function-name',name,'--runtime','python3.12','--handler','run.sh','--timeout','180','--memory-size','1024','--layers',layer,'--environment',json.dumps(env))
+        aws('lambda','update-function-configuration','--function-name',name,'--runtime','python3.12','--handler','run.sh','--timeout','180','--memory-size','1792','--layers',layer,'--environment',json.dumps(env))
     else:
         # IAM propagation can take several seconds; retry only the role-assumption error.
         for attempt in range(8):
             try:
-                aws('lambda','create-function','--function-name',name,'--runtime','python3.12','--role',iam['Role']['Arn'],'--handler','run.sh','--timeout','180','--memory-size','1024','--layers',layer,'--environment',json.dumps(env),'--code',json.dumps({'S3Bucket':bucket,'S3Key':artifact}))
+                aws('lambda','create-function','--function-name',name,'--runtime','python3.12','--role',iam['Role']['Arn'],'--handler','run.sh','--timeout','180','--memory-size','1792','--layers',layer,'--environment',json.dumps(env),'--code',json.dumps({'S3Bucket':bucket,'S3Key':artifact}))
                 break
             except RuntimeError as e:
                 if 'cannot be assumed' not in str(e) or attempt==7:raise

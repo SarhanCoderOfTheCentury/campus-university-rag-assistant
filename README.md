@@ -2,9 +2,11 @@
 
 ## React frontend on Vercel, LangChain RAG backend on AWS
 
-The root React/Vite application connects to the Python LangChain service on AWS Lambda through a real HTTPS SSE stream. See [the deployed AWS service and operating guide](docs/AWS-DEPLOYMENT.md). Its replacement corpus is the uploaded `dsu_rag_bundle.zip`: 45 sections from five classroom documents, freshly embedded using Gemini, searched with BM25/vector fusion and reranking. Complete answers undergo source-support and coverage checks before their Markdown sections and citations are emitted. [Rebuild and validation guide](docs/EMBEDDING-PIPELINE.md).
+The root React/Vite application connects to the Python LangChain service on AWS Lambda through a real HTTPS SSE stream. See [the deployed AWS service and operating guide](docs/AWS-DEPLOYMENT.md). Its replacement corpus is the uploaded `dsu_rag_bundle.zip`: 45 sections from five classroom documents, freshly embedded using Gemini and searched with BM25/vector fusion and complete metadata scopes. Complete answers undergo source-support and coverage checks before their Markdown sections and citations are emitted. [Rebuild and validation guide](docs/EMBEDDING-PIPELINE.md).
 
 Frontend: https://campus-university-rag-assistant-dqa.vercel.app/
+
+[Watch the actual agent demo — demo.mp4](demo.mp4) · [Speed improvements and measured results](docs/PERFORMANCE.md)
 
 Use Node.js 22, root directory `./`, install `npm ci`, build `npm run build`, output `dist`. The public AWS endpoint is in `src/config/deployment.json`; an optional `VITE_RAG_STREAM_URL` overrides it. Model credentials and all retrieval execution stay on AWS. This is a public-document assistant with shared usage limits, not an authenticated student-record system.
 

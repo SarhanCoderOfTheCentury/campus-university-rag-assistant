@@ -41,9 +41,11 @@ def cancel_key(request):
     return 'cancel:'+hashlib.sha256(values.encode()).hexdigest()
 
 async def cancelled(request):
-    result=await asyncio.to_thread(ddb.get_item,TableName=TABLE,Key={'pk':{'S':cancel_key(request)}},ConsistentRead=True,ProjectionExpression='cancelled')
-    explicit=result.get('Item',{}).get('cancelled',{}).get('BOOL',False)
-    return explicit or (request.session_token is not None and not await asyncio.to_thread(memory_store.current,request))
+    explicit_task=asyncio.to_thread(ddb.get_item,TableName=TABLE,Key={'pk':{'S':cancel_key(request)}},ConsistentRead=True,ProjectionExpression='cancelled')
+    if request.session_token:
+        result,current=await asyncio.gather(explicit_task,asyncio.to_thread(memory_store.current,request))
+    else:result,current=await explicit_task,True
+    return result.get('Item',{}).get('cancelled',{}).get('BOOL',False) or not current
 
 @lru_cache(maxsize=1)
 def agent():

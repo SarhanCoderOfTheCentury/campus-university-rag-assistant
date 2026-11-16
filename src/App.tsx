@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { ArrowUpIcon, BookOpenIcon, ChevronRightIcon, GraduationCapIcon, MoonIcon, PauseIcon, PlayIcon, PlusIcon, SquareIcon, SunIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -23,7 +23,9 @@ import { isRunning } from '@/lib/rag/state'
 import type { EvidenceSource } from '@/lib/rag/protocol'
 import type { AssistantMessage } from '@/lib/rag/session'
 
-const AssistantTurn = lazy(() => import('@/components/chat/AssistantTurn').then(module => ({ default: module.AssistantTurn })))
+const loadAssistantTurn = () => import('@/components/chat/AssistantTurn').then(module => ({ default: module.AssistantTurn }))
+const preloadAssistantTurn = () => { void loadAssistantTurn().catch(() => { /* Lazy loading can retry when the response mounts. */ }) }
+const AssistantTurn = lazy(loadAssistantTurn)
 const EducationalMotion = lazy(() => import('@/components/education/EducationalMotion'))
 
 /** Page assembly only. Every UI primitive is fetched from the official shadcn registry. */
@@ -32,6 +34,9 @@ export default function App() {
 }
 
 function CampusAssistant() {
+  // Fetch the Markdown/activity renderer while the student reads or types, so a
+  // first question can show actual backend progress without waiting for its chunk.
+  useEffect(() => {const timer=setTimeout(preloadAssistantTurn,1000);return ()=>clearTimeout(timer)},[])
   const { setOpen, setOpenMobile } = useSidebar()
   const { conversations, session, backendConfigured, activeConversationId:activeId } = useRagChat()
   const setActiveId=session.setActiveConversation

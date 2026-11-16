@@ -64,5 +64,5 @@ async def test_actual_corpus_retrieval_scope_and_required_coverage(intent):
     if intent=='catalogue':assert sum(r.get('is_programme',False) for r in result)==9
     if intent=='historical':assert {r['version'] for r in result if r['content_type']=='policy'}=={'3.0','2.1'}
     if intent=='focused':
-        assert {r['section'] for r in result}=={'Library Hours and Fines','Library Borrowing','Frequently Asked Questions'}
+        assert {'Library Hours and Fines','Library Borrowing','Frequently Asked Questions'} <= {r['section'] for r in result}
         assert all(not r['historical'] for r in result)

@@ -1,0 +1,47 @@
+{
+  "method": "Actual production HTTPS POST SSE events, session memory enabled, no synthetic delays",
+  "sample_size": 2,
+  "primary_model": "gemini-3.1-flash-lite",
+  "memory_mb": 1792,
+  "measurements": [
+    {
+      "question": "What is the current attendance rule, lab exception and medical certificate deadline?",
+      "before": {
+        "retrieval_seconds": 14.88,
+        "first_answer_seconds": 51.774,
+        "completed_seconds": 51.805
+      },
+      "after": {
+        "retrieval_seconds": 0.213,
+        "first_answer_seconds": 24.413,
+        "completed_seconds": 24.413,
+        "server_elapsed_seconds": 15.411
+      },
+      "cited_sources": 1
+    },
+    {
+      "question": "List all degree programmes with their duration and per-semester tuition in a table.",
+      "before": {
+        "retrieval_seconds": 12.759,
+        "first_answer_seconds": 29.758,
+        "completed_seconds": 29.782
+      },
+      "after": {
+        "retrieval_seconds": 0.006,
+        "first_answer_seconds": 14.857,
+        "completed_seconds": 14.862,
+        "server_elapsed_seconds": 6.295
+      },
+      "cited_sources": 10
+    }
+  ],
+  "checks": {
+    "backend_tests_passed": 36,
+    "frontend_tests_passed": 60,
+    "node22_build": "passed",
+    "live_catalogue_rows": 9,
+    "live_policy_comparison_rows": 3,
+    "actual_citations_and_source_passage": "verified"
+  },
+  "limits": "Small sample, not a latency SLA. Provider and network delays/cold starts vary. Local live suite had 3 passes and 4 provider/network failures; one initial post-deployment HTTP 503 was followed by successful measured requests."
+}
