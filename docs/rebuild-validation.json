@@ -9,6 +9,17 @@
   "frontend_tests": 60,
   "backend_tests": 33,
   "node_22_build": "passed",
+  "deployed_checks": {
+    "aws_health": "45 indexed sections; expected dataset revision and release",
+    "source_viewer": "HTTP 200; current v3.0 document",
+    "https_sse": "HTTP 200; 28 valid events; completed grounded attendance answer",
+    "vercel_catalogue": "Completed real response; all 9 programme rows, 3 columns, 10 citations",
+    "markdown_table": "Actual table/thead/tbody DOM, copy/export/fullscreen controls; no raw separator text",
+    "citation_inspector": "Original passage, section, version, effective date and valid AWS document link",
+    "routine_demo_warning_in_answer": false,
+    "small_scope_label_by_chat_input": true,
+    "page_overflow": "1363px document width equals 1363px viewport width"
+  },
   "real_model_checks": [
     {"case": "catalogue", "passed": true, "source_count": 10, "seconds": 26.5},
     {"case": "attendance", "passed": true, "source_count": 1, "seconds": 12.5},

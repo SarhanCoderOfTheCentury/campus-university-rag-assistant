@@ -36,3 +36,5 @@ The UI receives genuine progress events while planning, retrieval and generation
 The corpus replacement creates a new browser storage namespace and a dataset-scoped server memory key. Old cited answers and previous-corpus context do not leak into new sessions. Subsequent turns retain the existing refresh, correction, forgetting, cancellation and concurrency protection mechanisms.
 
 Official references: [Gemini embeddings](https://ai.google.dev/gemini-api/docs/embeddings), [Streamdown GFM](https://streamdown.ai/docs/gfm), [Streamdown typography](https://streamdown.ai/docs/typography).
+
+Verification: [rebuild-validation.json](rebuild-validation.json) records the automated and real-model checks, plus the deployed HTTPS SSE and Vercel browser results. [The live table screenshot](screenshots/rebuilt-rag-table.jpg) shows all nine programme rows, real citations and the small input label. The earlier deployment screenshots/reports document the superseded corpus and are retained as historical evidence.
